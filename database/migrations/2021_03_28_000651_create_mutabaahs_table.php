@@ -17,7 +17,7 @@ class CreateMutabaahsTable extends Migration
             $table->increments('id');
             $table->string('judul')->nullable();
             $table->integer('status'); // 1 = mentoring, 2 = general, 3 = talaqi, 4 = tugas besar
-            $table->integer('tanggal'); // 1 = mentoring, 2 = general, 3 = talaqi, 4 = tugas besar
+            $table->dateTime('tanggal'); // 1 = mentoring, 2 = general, 3 = talaqi, 4 = tugas besar
             $table->string('deleted_at')->nullable();
             $table->string('deleted_by')->nullable();
             $table->timestamps();
