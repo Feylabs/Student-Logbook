@@ -96,6 +96,8 @@
                               </select>
                             </div>
 
+                            <input type="hidden" name="user_id" value="{{Auth::guard('admin')->user()->id}}">
+
                             <button type="submit" class=" btn btn-rounded btn-outline-success btn-block">
                                 Tambah Agenda Mutabaah
                             </button>
