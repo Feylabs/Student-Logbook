@@ -20,7 +20,12 @@
                             class="hide-menu">Manage Jadwal
                         </span></a>
                 </li>
-     
+
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/data/mutabaah/preview') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+                            class="hide-menu">Preview Mutabaah
+                        </span></a>
+                </li>
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Data</span></li>
@@ -36,9 +41,9 @@
                             class="hide-menu">Manage Data Santri</span>
                     </a>
                 </li>
-     
-         
-            
+
+
+
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
                 <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="../../docs/docs.html"
