@@ -68,7 +68,6 @@ class MutabaahController extends Controller
         $object->deleted_by = $request->user_id;
         $object->deleted_at = Carbon::now();
         $object->save();
-
     }
 
     function viewAdminManage(Request $request)
