@@ -79,7 +79,7 @@
 
                                 <div class="form-group">
                                     <label for="">Tanggal Mutaba'ah</label>
-                                    <input type="datetime-local"
+                                    <input type="date"
                                            class="form-control" name="tanggal" id="" aria-describedby="input_date"
                                            placeholder="">
                                     <small id="input_date" class="form-text text-muted">Klik Logo Calendar untuk memilih tanggal</small>

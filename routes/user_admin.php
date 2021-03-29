@@ -16,6 +16,9 @@ Route::post('/santri/import','DataController@importExcelSantri')->name('import_s
 Route::post('/mutabaah/store','MutabaahController@store');
 
 Route::get('/mutabaah/eloquent','MutabaahController@testEloquent');
+Route::get('/mutabaah/{id}/fetch','MutabaahController@getById');
+Route::post('/mutabaah/{id}/updateAjax','MutabaahController@updateAjax');
+Route::delete('/mutabaah/{id}/deleteAjax','MutabaahController@deleteAjax');
 
 
 ?>

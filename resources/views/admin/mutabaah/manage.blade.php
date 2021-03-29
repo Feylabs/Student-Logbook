@@ -36,11 +36,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Default Ordering</h4>
-                    <h6 class="card-subtitle">With DataTables you can alter the ordering characteristics of
-                        the table at initialisation time. Using the<code> order | option</code> order
-                        initialisation parameter, you can set the table to display the data in exactly the
-                        order that you want.</h6>
+                    <h4 class="card-title">Manage Mutaba'ah</h4>
+                    <h6 class="card-subtitle">
+                        Data Agenda Mutaba'ah Yang Dapat Diisi Oleh Santri, Edit dan Hapus Agenda dengan tombol yang berada
+                        di sisi kanan tabel
+                    </h6>
                     <div class="table-responsive">
                         <table id="table_mutabaah" class="table table-striped table-bordered display no-wrap"
                             style="width:100%">
@@ -67,6 +67,73 @@
         </div>
     </div>
 
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-modalLabel">Edit Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
+                            <input type="hidden" required="" id="id" name="id" class="form-control">
+                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
+                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="">Ganti Status Mutaba'ah</label>
+                            <select class="form-control" required name="status" id="new_status">
+                                <option value="">Pilih Status</option>
+                                <option value="1">Dibuka</option>
+                                <option value="0">Ditutup</option>
+                                <option value="3">Pending</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-update">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Edit -->
+
+    <!-- Destroy Modal -->
+    <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Agenda Ini ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger btn-destroy">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Destroy Modal -->
+
+
+
 
 
 
@@ -85,6 +152,8 @@
     </script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
     </script>
+
+
 
 
     <script type="text/javascript">
@@ -140,13 +209,14 @@
                                     html = '<h5 class="badge badge-warning">' + 'Ditutup' + '</h5>';
                                     break;
                                 case 3:
-                                    html = '<h5 class="badge badge-pending">' + 'Pending' + '</h5>';
+                                    html = '<h5 class="badge badge-danger">' + 'Pending' + '</h5>';
                                     break;
                                 default:
-                                    html = '<h5 class="badge badge-primary">' + 'Tidak Diketahui' + '</h5>';
+                                    html = '<h5 class="badge badge-primary">' + 'Tidak Diketahui' +
+                                        '</h5>';
                                     break;
                             }
-                            return html  ;
+                            return html;
                         }
                     },
                     {
@@ -158,9 +228,89 @@
 
                 ]
             });
+
+            $('body').on("click", ".btn-delete", function() {
+                var id = $(this).attr("id")
+                $(".btn-destroy").attr("id", id)
+                $("#destroy-modal").modal("show")
+            });
+
+
+            // Edit & Update
+            $('body').on("click", ".btn-edit", function() {
+                var id = $(this).attr("id")
+                $.ajax({
+                    url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
+                    method: "GET",
+                    success: function(response) {
+                        $("#edit-modal").modal("show")
+                        console.log(response)
+                        $("#id").val(response.id)
+                        $("#name").val(response.judul)
+                        $("#edit_date").val(response.tanggal)
+                        $("#role").val(response.role)
+                    }
+                })
+            });
+
         });
 
+        $("#editForm").on("submit", function(e) {
+            e.preventDefault()
+            var id = $("#id").val()
+            var judul = $("#name").val()
+            var tanggal = $("#edit_date").val()
+            var status = $("#new_status").val()
+            $.ajax({
+                url: "{{ URL::to('/') }}/mutabaah/" + id + "/updateAjax",
+                method: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id,
+                    "judul": judul,
+                    "tanggal": tanggal,
+                    "status": status,
+                },
+                success: function(result, status, xhr) {
+                    console.log(result);
+                    $('#table_mutabaah').DataTable().ajax.reload();
+                    $("#edit-modal").modal("hide")
+                    swal("Alhamdulillah", "Berhasil Mengupdate Mutaba'ah", "success");
+                },
+                error: function(xhr, error, code) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err);
+                    alert(err.toString());
+                    swal("Error", "Gagal Mengupdate Mutaba'ah", "error");
+                }
+            })
+        })
+
+        $(".btn-destroy").on("click", function() {
+            var id = $(this).attr("id")
+            $.ajax({
+                url: "{{ URL::to('/') }}/mutabaah/" + id + "/deleteAjax",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "user_id": {{ Auth::guard('admin')->user()->id }},
+                    "id": id,
+                },
+                method: "DELETE",
+                success: function() {
+                    $("#destroy-modal").modal("hide")
+                    $('#table_mutabaah').DataTable().ajax.reload();
+                },
+                error: function(xhr, error, code) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err);
+                    swal("Error", "Gagal Mengupdate Mutaba'ah "+err.toString, "error");
+                }
+            });
+        })
+
     </script>
+
+
 
 
 @endsection
