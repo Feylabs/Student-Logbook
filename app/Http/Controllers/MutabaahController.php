@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mutabaah;
 use App\Models\Santri;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -40,11 +41,45 @@ class MutabaahController extends Controller
         return view('admin.mutabaah.create');
     }
 
+    function getById($id){
+        $data = Mutabaah::find($id);
+        return response()->json($data);
+    }
+
+    function updateAjax(Request $request){
+        $id = $request->id;
+        $judul = $request->judul;
+        $tanggal = $request->tanggal;
+        $status = $request->status;
+
+        $object = Mutabaah::find($id);
+        $object->judul = $judul;
+        $object->status = $status;
+        $object->tanggal = $tanggal;
+        $object->save();
+
+        return $object;
+
+    }
+
+    function deleteAjax(Request $request){
+        $id = $request->id;
+        $object = Mutabaah::find($id);
+        $object->deleted_by = $request->user_id;
+        $object->deleted_at = Carbon::now();
+        $object->save();
+
+    }
+
     function viewAdminManage(Request $request)
     {
-        $data = Mutabaah::select('*')->orderBy('created_at', 'DESC');
+        $data = Mutabaah::select('*')
+        ->whereColumn('deleted_at','=', null)
+        ->orderBy('created_at', 'DESC');
         if ($request->ajax()) {
-            $data = Mutabaah::select('*')->orderBy('created_at', 'DESC');
+            $data = Mutabaah::select('*')
+            ->where('deleted_at','=', null)
+            ->orderBy('created_at', 'DESC');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

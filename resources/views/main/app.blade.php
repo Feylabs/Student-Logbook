@@ -48,7 +48,7 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        @if(Auth::guard('admin')->check())
+        @if (Auth::guard('admin')->check())
             @include('main.components.topbar-admin')
         @endif
         <!-- ============================================================== -->
@@ -57,7 +57,7 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        @if(Auth::guard('admin')->check())
+        @if (Auth::guard('admin')->check())
             @include('main.components.left-sidebar-admin')
         @endif
         <!-- ============================================================== -->
@@ -89,8 +89,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center text-muted">
-                Developed and Programmed by  <a
-                    href="http://henryaugusta.feylabs.my.id">Henry Augusta</a>.
+                Developed and Programmed by <a href="http://henryaugusta.feylabs.my.id">Henry Augusta</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -129,7 +128,11 @@
     <script src="{{ URL::to('bootstrap_ui') }}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js">
     </script>
 
-    <script src="{{ url("bower_components/sweetalert/dist/sweetalert.min.js") }}"></script>
+    <script src="{{ url('bower_components/sweetalert/dist/sweetalert.min.js') }}"></script>
+    {{-- <script src="sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script> --}}
+
 
 
     @yield('app-script')
