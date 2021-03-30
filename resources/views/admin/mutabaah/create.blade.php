@@ -27,93 +27,275 @@
 
 @section('page-wrapper')
     <div class="row">
-        
-        <div class="col-md-12">
-            @include('components.message')
-        </div>
+        <form class="row" action="{{ url('/mutabaah/store') }}" method="post">
 
-        <div class="col-md-12">
-            <div class="card">
-                <div class="">
-                    <div class="row">
-                        <div class="col-lg-3 border-right pr-0">
-                            <div class="card-body border-bottom">
-                                <h4 class="card-title mt-2">Buat Agenda Mutaba'ah Baru</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="calendar-events" class="">
-                                            <div class="calendar-events mb-3" data-class="bg-info"><i
-                                                    class="fa fa-circle text-info mr-2"></i>Event One</div>
-                                            <div class="calendar-events mb-3" data-class="bg-success"><i
-                                                    class="fa fa-circle text-success mr-2"></i> Event Two
-                                            </div>
-                                            <div class="calendar-events mb-3" data-class="bg-danger"><i
-                                                    class="fa fa-circle text-danger mr-2"></i>Event Three
-                                            </div>
-                                            <div class="calendar-events mb-3" data-class="bg-warning"><i
-                                                    class="fa fa-circle text-warning mr-2"></i>Event Four
-                                            </div>
-                                        </div>
-                                        <!-- checkbox -->
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="drop-remove">
-                                            <label class="custom-control-label" for="drop-remove">Remove
-                                                after drop</label>
-                                        </div>
-                                    </div>
+
+            <div class="col-md-12">
+                @include('components.message')
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-3 border-right pr-0">
+                                <div class="card-body border-bottom">
+                                    <h4 class="card-title mt-2">Buat Agenda Mutaba'ah Baru</h4>
+                                </div>
+                                <div class="card-body">
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-9 p-4">
-                            <form action="{{url('/mutabaah/store')}}" method="post">
+                            <div class="col-lg-9 p-4">
                                 @csrf
                                 <div class="form-group">
                                     <label for="">Nama Agenda Mutabaah</label>
-                                    <input type="text"
-                                           class="form-control" name="judul" id="" aria-describedby="helpId"
-                                           placeholder="Judul Mutabaah (Opsional)">
-                                    <small class="form-text text-muted">Help text</small>
+                                    <input type="text" class="form-control" required name="judul" id=""
+                                        aria-describedby="helpId" placeholder="Judul Mutabaah (Opsional)">
+                                    <small class="form-text text-muted">Judul Mutabaah</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Tanggal Mutaba'ah</label>
-                                    <input type="date"
-                                           class="form-control" name="tanggal" id="" aria-describedby="input_date"
-                                           placeholder="">
-                                    <small id="input_date" class="form-text text-muted">Klik Logo Calendar untuk memilih tanggal</small>
-                                    <small id="input_date2" class="form-text text-muted">Mutabaah hanya dapat diakses pada tanggal terkait</small>
+                                    <input type="date" required class="form-control" name="tanggal" id=""
+                                        aria-describedby="input_date" placeholder="">
+                                    <small id="input_date" class="form-text text-muted">Klik Logo Calendar untuk memilih
+                                        tanggal</small>
+                                    <small id="input_date2" class="form-text text-muted">Mutabaah hanya dapat diakses pada
+                                        tanggal terkait</small>
                                 </div>
 
 
-                            <div class="form-group">
-                              <label for="">Status Mutaba'ah</label>
-                              <select class="form-control" name="status" id="">
-                                <option value="1">Dibuka</option>
-                                <option value="0">Ditutup</option>
-                                <option value="3">Pending</option>
-                              </select>
+                                <div class="form-group">
+                                    <label for="">Status Mutaba'ah</label>
+                                    <select required class="form-control" name="status" id="">
+                                        <option value="1">Dibuka</option>
+                                        <option value="0">Ditutup</option>
+                                        <option value="3">Pending</option>
+                                    </select>
+                                </div>
+
+                                <input type="hidden" name="user_id" value="{{ Auth::guard('admin')->user()->id }}">
+
+
                             </div>
 
-                            <input type="hidden" name="user_id" value="{{Auth::guard('admin')->user()->id}}">
 
-                            <button type="submit" class=" btn btn-rounded btn-outline-success btn-block">
-                                Tambah Agenda Mutabaah
-                            </button>
+                        </div>
 
 
 
-                            </form>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h2 class="card-title">Kegiatan Yang Dinilai</h2>
+                        <h4 class="card-subtitle">
+                            Tambahkan Kegiatan Yang Akan Dinilai Beserta Poin Kegiatan
+                        </h4>
+                        <h4>
+                            Total Skor Kegiatan (Max 100) = <span id="totalSkor"></span>
+                        </h4>
+
+                        <div class="container row mb-4">
+                            <div class=" col-12 col-md-6">
+                                <label for="">Nama Kegiatan</label>
+                                <input type="text" class="form-control" name="" id="fName" aria-describedby="helpId"
+                                    placeholder="Nama Kegiatan">
+                                <small id="helpId" class="form-text text-muted">Nama Kegiatan</small>
+                            </div>
+                            <div class=" col-12 col-md-6">
+                                <label for="">Jumlah Poin</label>
+                                <input type="number" class="form-control" name="" id="fPoin" aria-describedby="helpId"
+                                    placeholder="Poin Kegiatan">
+                                <small id="" class=" form-text text-muted">Masukkan Jumlah Poin Kegiatan</small>
+                            </div>
+                        </div>
+
+                        <button onclick="addRow()" type="button" class="col-6 btn btn-rounded btn-primary mb-4">
+                            Tambah Kegiatan ke Agenda
+                        </button>
+
+                        <button onclick="addDefaultRow()" type="button" class="col-6 btn btn-rounded btn-primary mb-4">
+                            Input Agenda dari Template
+                        </button>
+
+                        <div class="table-responsive">
+                            <table id="tableActivity" class="table table-hover table-success table-bordered display no-wrap"
+                                style="width:100%">
+                                <thead class="bg-success text-white">
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Poin</th>
+                                        <th>Batal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <button type="submit" class=" btn btn-rounded btn-outline-success btn-block">
+                            Input Agenda Mutabaah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 @endsection
 
 
 @section('app-script')
+    <script>
+        let totalPoin = 0;
+        let fNumber = 0;
+
+        function addRowManually(name, poin) {
+            let error = false;
+            if (totalPoin + poin > 100) {
+                error = true
+                swal("Error", "Maksimum Poin adalah 100 ", "error");
+            }
+
+            if (name == "" || poin == "") {
+                error = true
+                swal("Error", "Lengkapi Nama Kegiatan dan Poin Terlebih Dahulu ", "error");
+            }
+
+            if (error == false) {
+                fNumber++;
+                totalPoin += poin;
+
+                $("#totalSkor").html("");
+                $('#totalSkor').text(totalPoin);
+
+                $("#tableActivity").find('tbody')
+                    .append($('<tr>')
+                        .append($('<td>')
+                            .append($('  <input type="text" class="form-control" name="activityName[]"  value="' +
+                                name + '" placeholder="">'))
+                        )
+                        .append($('<td>')
+                            .append($('<h4 class="poinKeg">')
+                                .append($(
+                                    '  <input type="text" class="form-control" readonly name="activityPoin[]"  value="' +
+                                    poin + '" placeholder="">'))
+                            )
+                        )
+                        .append($('<td>')
+                            .append($('<button type="button" onclick="decPoin(' + poin +
+                                    ')" class="btn btn-primary razBtn">')
+                                .text("Hapus Kegiatan")
+                            )
+                        )
+                    );
+
+                $('button.razBtn').on('click', function() {
+                    $(this).closest("tr").remove();
+                })
+            }
+        }
+
+        function addRow() {
+            const name = $('#fName').val();
+            const poin = parseInt($('#fPoin').val());
+
+            let error = false;
+
+            if (totalPoin + poin > 100) {
+                error = true
+                swal("Error", "Maksimum Poin adalah 100 ", "error");
+            }
+
+            if (name == "" || poin == "") {
+                error = true
+                swal("Error", "Lengkapi Nama Kegiatan dan Poin Terlebih Dahulu ", "error");
+            }
+
+            if (error == false) {
+                fNumber++;
+                totalPoin += poin;
+
+                $("#totalSkor").html("");
+                $('#totalSkor').text(totalPoin);
+
+                $("#tableActivity").find('tbody')
+                    .append($('<tr>')
+                        .append($('<td>')
+                            .append($('  <input type="text" class="form-control" name="activityName[]"  value="' +
+                                name + '" placeholder="">'))
+                        )
+                        .append($('<td>')
+                            .append($('<h4 class="poinKeg">')
+                                .append($(
+                                    '  <input type="text" class="form-control" readonly name="activityPoin[]"  value="' +
+                                    poin + '" placeholder="">'))
+                            )
+                        )
+                        .append($('<td>')
+                            .append($('<button type="button" onclick="decPoin(' + poin +
+                                    ')" class="btn btn-primary razBtn">')
+                                .text("Hapus Kegiatan")
+                            )
+                        )
+                    );
+
+                $('button.razBtn').on('click', function() {
+                    $(this).closest("tr").remove();
+                })
+            }
+        }
+
+
+        function addDefaultRow() {
+            addRowManually("Qiyamul Lail",10);
+            addRowManually("Bangun Sebelum Azan Shubuh",5);
+            addRowManually("Membaca Dzikir Pagi",7);
+            addRowManually("Membaca Dzikir Petang",7);
+            addRowManually("Berpuasa / Shoum",3);
+            addRowManually("Sholat Dhuha",3);
+            addRowManually("Sholat Shubuh Tepat Waktu",7);
+            addRowManually("Sholat Dzuhur Tepat Waktu",7);
+            addRowManually("Sholat Ashar Tepat Waktu",7);
+            addRowManually("Sholat Maghrib Tepat Waktu",7);
+            addRowManually("Sholat Isya Tepat Waktu",7);
+            addRowManually("Tilawah Quran diluar Waktu Halaqoh",5);
+            addRowManually("Birrul Walidain / Membantu Orang Tua",5);
+            addRowManually("Membaca Buku-Buku Islam/Pengetahuan",5);
+            addRowManually("Membaca/Menghafalkan Hadits",5);
+            addRowManually("Berolahraga",5);
+            addRowManually("Bersedekah",5);
+            addRowManually("Mendengar Murottal AlQuran",5);
+
+            swal("Alhamdulillah", "Berhasil Menambahkan Kegiatan", "success");
+        }
+
+    </script>
+
+    @include('admin.mutabaah.script_default')
+
 
 @endsection

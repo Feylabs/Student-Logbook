@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>Albinaa Mutaba'ah</title>
     <!-- Custom CSS -->
     <link href="{{ URL::to('/bootstrap_ui/') }}/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -161,8 +161,7 @@
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    Kesantrian Albinaa IBS © {{ \Carbon\Carbon::now()->year }} <br>
-                                    Developed by Henry Augusta
+                                    Kesantrian Albinaa IBS © {{ \Carbon\Carbon::now()->year }} <br><br>
                                 </div>
                             </div>
                         </form>

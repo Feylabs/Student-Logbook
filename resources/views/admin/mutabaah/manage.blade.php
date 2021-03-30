@@ -15,11 +15,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
+                <h4>Test</h4>
             </div>
         </div>
     </div>
@@ -70,7 +66,7 @@
     <!-- Modal Edit -->
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="edit-modalLabel">Edit Data</h5>
@@ -80,17 +76,18 @@
                 </div>
                 <div class="modal-body">
                     <form id="editForm">
+
                         <div class="form-group">
                             <label for="name">Judul/Nama Agenda Mutaba'ah</label>
                             <input type="hidden" required="" id="id" name="id" class="form-control">
                             <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
                                 class="form-control">
                         </div>
+
                         <div class="form-group">
                             <label for="edit_datetime">Tanggal Mutaba'ah</label>
                             <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
                         </div>
-
 
                         <div class="form-group">
                             <label for="">Ganti Status Mutaba'ah</label>
@@ -101,6 +98,22 @@
                                 <option value="3">Pending</option>
                             </select>
                         </div>
+
+                        <div class="table-responsive">
+                            <table id="tableActivity" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kegiatan</th>
+                                        <th>Poin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -191,12 +204,7 @@
                         data: 'tanggal',
                         name: 'tanggal'
                     },
-                    {
-                        data: 'created_byz',
-                        name: 'created_byz',
-                        orderable: true,
-                        searchable: true
-                    },
+
                     {
                         render: function(datum, type, row) {
                             console.log(row.status);
@@ -218,6 +226,12 @@
                             }
                             return html;
                         }
+                    },
+                    {
+                        data: 'created_byz',
+                        name: 'created_byz',
+                        orderable: true,
+                        searchable: true
                     },
                     {
                         data: 'action',
@@ -243,12 +257,30 @@
                     url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
                     method: "GET",
                     success: function(response) {
+                        console.log(response.toString());
                         $("#edit-modal").modal("show")
                         console.log(response)
-                        $("#id").val(response.id)
-                        $("#name").val(response.judul)
-                        $("#edit_date").val(response.tanggal)
-                        $("#role").val(response.role)
+                        $("#id").val(response.data.id)
+                        $("#name").val(response.data.judul)
+                        $("#edit_date").val(response.data.tanggal)
+
+                        $("#tableActivity > tbody").html("");
+                        response.activity.forEach(element => {
+                            $("#tableActivity").find('tbody')
+                                .append($('<tr>')
+                                    .append($('<td>')
+                                        .append($('<div>' + element.nama_kegiatan +
+                                            '</div>'))
+                                    )
+                                    .append($('<td>')
+                                        .append($('<div>' + element.nama_kegiatan +
+                                            '</div>'))
+                                    )
+                                    .append($('<td>')
+                                        .append($('<div>' + element.poin + '</div>'))
+                                    )
+                                );
+                        });
                     }
                 })
             });
@@ -303,7 +335,7 @@
                 error: function(xhr, error, code) {
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(err);
-                    swal("Error", "Gagal Mengupdate Mutaba'ah "+err.toString, "error");
+                    swal("Error", "Gagal Mengupdate Mutaba'ah " + err.toString, "error");
                 }
             });
         })

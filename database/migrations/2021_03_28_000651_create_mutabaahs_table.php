@@ -14,7 +14,7 @@ class CreateMutabaahsTable extends Migration
     public function up()
     {
         Schema::create('mutabaah', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('judul')->nullable();
             $table->integer('status'); // 1 = mentoring, 2 = general, 3 = talaqi, 4 = tugas besar
             $table->date('tanggal'); // 1 = mentoring, 2 = general, 3 = talaqi, 4 = tugas besar

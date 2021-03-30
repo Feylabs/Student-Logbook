@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
+use App\Models\Admin;
 use App\Models\Mutabaah;
 use App\Models\Santri;
 use Carbon\Carbon;
@@ -41,12 +43,25 @@ class MutabaahController extends Controller
         return view('admin.mutabaah.create');
     }
 
-    function getById($id){
-        $data = Mutabaah::find($id);
-        return response()->json($data);
+    function viewAdminPreview()
+    {
+        return view('admin.mutabaah.preview');
     }
 
-    function updateAjax(Request $request){
+    function getById($id)
+    {
+        $data = Mutabaah::find($id);
+        $activity = Activity::where('mutabaah_id','=',$id)->get();
+
+        $widget = [
+            "data" => $data,
+            "activity" => $activity
+        ];
+        return response()->json($widget);
+    }
+
+    function updateAjax(Request $request)
+    {
         $id = $request->id;
         $judul = $request->judul;
         $tanggal = $request->tanggal;
@@ -59,10 +74,10 @@ class MutabaahController extends Controller
         $object->save();
 
         return $object;
-
     }
 
-    function deleteAjax(Request $request){
+    function deleteAjax(Request $request)
+    {
         $id = $request->id;
         $object = Mutabaah::find($id);
         $object->deleted_by = $request->user_id;
@@ -72,13 +87,14 @@ class MutabaahController extends Controller
 
     function viewAdminManage(Request $request)
     {
+
         $data = Mutabaah::select('*')
-        ->whereColumn('deleted_at','=', null)
-        ->orderBy('created_at', 'DESC');
+            ->whereColumn('deleted_at', '=', null)
+            ->orderBy('created_at', 'DESC');
         if ($request->ajax()) {
             $data = Mutabaah::select('*')
-            ->where('deleted_at','=', null)
-            ->orderBy('created_at', 'DESC');
+                ->where('deleted_at', '=', null)
+                ->orderBy('created_at', 'DESC');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -87,10 +103,12 @@ class MutabaahController extends Controller
                     return $btn;
                 })
                 ->addColumn('created_byz', function ($row) {
-
-                    return $row->admin->name;
+                    $mutabaah = Mutabaah::where('id', '=', $row->id)->get();
+                    $admin = Admin::where('id', '=', $row->created_by)->first();
+                    $name = $admin->name;
+                    return $name;
                 })
-                ->rawColumns(['action','created_byz'])
+                ->rawColumns(['action', 'created_byz'])
                 ->make(true);
             dd($request->all());
         }
@@ -119,6 +137,17 @@ class MutabaahController extends Controller
         $object->tanggal = $request->tanggal;
         $object->created_by = $request->user_id;
         $object->save();
+
+        $loopIteration = 0;
+        foreach ($request->activityName as $key) {
+            $activity = new Activity();
+            $activity->mutabaah_id = $object->id;
+            $activity->nama_kegiatan = $request->activityName[$loopIteration];
+            $activity->poin = $request->activityPoin[$loopIteration];
+            $activity->save();
+            $loopIteration += 1;
+        }
+
 
         if ($object) {
             return back()->with(["success" => "Berhasil Menginput Agenda Mutabaah"]);
