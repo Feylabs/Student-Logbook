@@ -25,6 +25,8 @@ class CreateSantrisTable extends Migration
             $table->string('jenjang')->nullable();
             $table->string('line_id')->nullable();
             $table->string('photo_path')->nullable();
+            $table->unsignedBigInteger('mentor_id');
+            $table->foreign('mentor_id')->references('id')->on('admin')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

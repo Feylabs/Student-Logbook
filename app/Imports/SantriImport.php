@@ -14,7 +14,6 @@ class SantriImport implements ToModel
      */
     public function model(array $row)
     {
-
         $password = ('$2y$12$yEeLQTZtnfT77kjbTSFHJuSCD4g3Q6J1T9ourXCb.T8wpDZerCGW.');
         if (collect($row)->filter()->isNotEmpty()) {
             return new Santri([

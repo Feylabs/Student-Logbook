@@ -19,6 +19,7 @@
 
     <link href="{{ url('bower_components/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
 
+    @yield('style')
 
     <!-- Custom CSS -->
     <link href="{{ URL::to('bootstrap_ui') }}/dist/css/style.min.css" rel="stylesheet">
@@ -73,6 +74,7 @@
             <div class="page-breadcrumb">
                 @yield('page-breadcrumb')
             </div>
+
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
