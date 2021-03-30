@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 include __DIR__.'/adminmart.php';
 include __DIR__.'/user_admin.php';
+include __DIR__.'/user_santri.php';
 /*
 |--------------------------------------------------------------------------
 | Web Routes

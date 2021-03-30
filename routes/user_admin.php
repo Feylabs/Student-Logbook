@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::group(['prefix' => 'post', 'middleware' => ['auth']], function(){
+    Route::get('all','Controller@post');
+    Route::get('user','Controller@post');
+});
 
-
-Route::prefix('admin')->group(function () {
+Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::view('/data/santri/import','admin.santri.import');
     Route::get('/data/mutabaah/create','MutabaahController@viewAdminCreate');
     Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
