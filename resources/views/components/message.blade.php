@@ -4,17 +4,12 @@
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
-
-    <script>
-       swal("Alhamdulillah", "{{Session::get( 'success' )}}", "success");
-    </script>
-
     <strong>{{Session::get( 'success' )}}</strong>
 </div>
 
 @elseif(session() -> has('error'))
 
-<div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
+<div class="alert alert-danger alert-dismissible fade show mx-2 my-2" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
