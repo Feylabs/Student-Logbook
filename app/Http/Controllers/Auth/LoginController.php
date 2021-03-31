@@ -62,4 +62,27 @@ class LoginController extends Controller
         }
         return back()->withInput($request->only('nisn', 'remember'));
     }
+
+    public function santriLogin(Request $request)
+    {
+        $this->validate($request, [
+            'nis'   => 'required',
+            'password' => 'required|min:6'
+        ]);
+
+        if (Auth::guard('santri')->attempt(
+            [
+                'nis' => $request->nis,
+                'password' => $request->password
+            ],
+            $request->get('remember')
+        )) {
+            return redirect()->intended('/santri')->with(['success'=>"Login Berhasil"]);
+        } else {
+            return redirect('login/santri')->withErrors([
+                'error' => 'Username Atau Password Salah'
+            ]);
+        }
+        return back()->withInput($request->only('nis', 'remember'));
+    }
 }
