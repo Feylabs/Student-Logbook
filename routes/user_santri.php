@@ -6,10 +6,14 @@ Route::get('/santri/mutabaah/export/daily', 'SantriController@laporanExcel')->na
 Route::get('/santri/mutabaah/export/all', 'SantriController@laporanExcelAll')->name('santri.mutabaah.export.all');
 
 Route::prefix('santri')->group(function () {
-    Route::get('/','HomeSantriController@index');
+    // Route::get('/','HomeSantriController@index');
+    Route::get('/','Mp3StreamingController@viewSantriPreview');
 
 
     Route::view('/data/santri/import','admin.santri.import');
+
+    Route::any('/mp3','Mp3StreamingController@viewSantriPreview');
+
     Route::get('/mutabaah/input','SantriMutabaahController@viewSantriInit');
     Route::get('/mutabaah/report','SantriMutabaahController@viewSantriReport');
     Route::get('/mutabaah/report/all','SantriMutabaahController@viewSantriReportAll')->name('santri.mutabaah.see_report_all');;

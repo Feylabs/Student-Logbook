@@ -90,21 +90,6 @@
                         <button type="button" onclick="sure()" class="btn btn-block btn-outline-primary">Kirim Lembar
                             Mutaba'ah</button>
 
-
-                        {{-- <ul class="pagination float-right">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul> --}}
-
                     </div>
                 </div>
             </div>
@@ -143,7 +128,6 @@
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    alert("iiii")
                     $("#formMutabaah").submit();
                     swal("Lembar Mutabaah Akan Diinput ke Database", "", "success");
                 } else {

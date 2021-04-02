@@ -16,9 +16,10 @@
     <link href="{{ URL::to('bootstrap_ui') }}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="{{ URL::to('bootstrap_ui') }}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css"
         rel="stylesheet" />
-        
-     <!-- Toggle -->
-     <link href="{{ URL::to('bootstrap_ui') }}/assets/libs/toggle_switch/dist/css/component-custom-switch.min.css" rel="stylesheet">
+
+    <!-- Toggle -->
+    <link href="{{ URL::to('bootstrap_ui') }}/assets/libs/toggle_switch/dist/css/component-custom-switch.min.css"
+        rel="stylesheet">
 
     <link href="{{ url('bower_components/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
     <link href="{{ url('bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
@@ -152,6 +153,10 @@
 
 
     @yield('app-script')
+
+    <script>
+        // document.body.style.zoom = 0.8
+    </script>
 
 
 </body>

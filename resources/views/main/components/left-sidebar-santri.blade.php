@@ -11,8 +11,8 @@
                 <li class="nav-small-cap"><span class="hide-menu">Mutabaah</span></li>
 
                 <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/input') }}"
-                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                            class="hide-menu">Isi Mutaba'ah
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Isi
+                            Mutaba'ah
                         </span></a>
                 </li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/report') }}"
@@ -21,15 +21,22 @@
                         </span></a>
                 </li>
 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{  URL('santri/mutabaah/report/all')}}"
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/report/all') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                             class="hide-menu">Seluruh Report
                         </span></a>
                 </li>
 
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Data</span></li>
-             
+                <li class="nav-small-cap"><span class="hide-menu">Streaming MP3</span></li>
+
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mp3/') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+                            class="hide-menu">Streaming MP3
+                        </span></a>
+                </li>
+
+                
 
 
 
@@ -38,7 +45,15 @@
                 <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="../../docs/docs.html"
                         aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span
                             class="hide-menu">Documentation</span></a></li>
-                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="authentication-login1.html"
+                {{-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                    <i data-feather="power" class="svg-icon mr-2 ml-1"></i>Logout</a> --}}
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();  document.getElementById('logout-form').submit();"
                         aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                             class="hide-menu">Logout</span></a></li>
             </ul>
