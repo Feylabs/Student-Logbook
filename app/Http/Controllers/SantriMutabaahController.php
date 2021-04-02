@@ -163,9 +163,6 @@ class SantriMutabaahController extends Controller
             "recordMutabaah" => $recordMutabaah
         ];
 
-
-
-
         return view('santri.mutabaah.report_detail')
             ->with(compact('widget'));
     }

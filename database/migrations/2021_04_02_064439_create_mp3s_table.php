@@ -15,6 +15,11 @@ class CreateMp3sTable extends Migration
     {
         Schema::create('mp3s', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->string("artist");
+            $table->string("url")->nullable();
+            $table->string("cover")->nullable();
+            $table->string("deleted_at")->nullable();
             $table->timestamps();
         });
     }

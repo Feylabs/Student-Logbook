@@ -161,7 +161,9 @@
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    Kesantrian Albinaa IBS © {{ \Carbon\Carbon::now()->year }} <br><br>
+                                    Kesantrian Albinaa IBS © {{ \Carbon\Carbon::now()->year }} <br>
+                                    Developed by Henry Augusta <br>
+                                    <a href="{{url('/login/santri')}}"><small>Klik Disinu Untuk Login Santri</small></a>
                                 </div>
                             </div>
                         </form>

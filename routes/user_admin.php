@@ -13,7 +13,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
     Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');
 
-    Route::any('/data/mp3','MutabaahController@viewAdminPreview');
+    Route::any('/data/mp3','Mp3StreamingController@viewAdminPreview');
+    Route::any('/data/mp3/store','Mp3StreamingController@store')->name('admin.upload.mp3');
 
     Route::post('/data/mutabaah/report/check','AdminReportMutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');
     Route::get('/data/mutabaah/report/check','AdminReportMutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');

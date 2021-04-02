@@ -122,7 +122,7 @@
                             Tambah Kegiatan ke Agenda
                         </button>
 
-                        <button onclick="addDefaultRow()" type="button" class="col-6 btn btn-rounded btn-primary mb-4">
+                        <button onclick="addDefaultRow()" type="button" class="col-6 btn btn-rounded btn-outline-primary mb-4">
                             Input Agenda dari Template
                         </button>
 

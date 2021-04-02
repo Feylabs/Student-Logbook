@@ -483,5 +483,5 @@
 @endsection
 
 @section('app-script')
-    @include('admin.dashboard.script')
+    @include('santri.dashboard.script')
 @endsection

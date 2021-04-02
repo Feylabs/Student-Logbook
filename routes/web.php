@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::redirect('/','/login/santri');
+
 Route::view('login/santri','auth.login_santri');
 Route::view('login/admin','auth.login_admin');
 
