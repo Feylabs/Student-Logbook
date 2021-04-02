@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+Route::get('/santri/mutabaah/export/daily', 'SantriController@laporanExcel')->name('santri.mutabaah.export.daily');
+Route::get('/santri/mutabaah/export/all', 'SantriController@laporanExcelAll')->name('santri.mutabaah.export.all');
 
 Route::prefix('santri')->group(function () {
     Route::get('/','HomeSantriController@index');
@@ -10,8 +11,12 @@ Route::prefix('santri')->group(function () {
 
     Route::view('/data/santri/import','admin.santri.import');
     Route::get('/mutabaah/input','SantriMutabaahController@viewSantriInit');
-    Route::get('/mutabaah/input/{id}','SantriMutabaahController@input')->name('santri.mutabaah.input');
-    Route::post('/mutabaah/input/{id}','SantriMutabaahController@store')->name('santri.mutabaah.store');
+    Route::get('/mutabaah/report','SantriMutabaahController@viewSantriReport');
+    Route::get('/mutabaah/report/all','SantriMutabaahController@viewSantriReportAll')->name('santri.mutabaah.see_report_all');;
+    
+    Route::get('/mutabaah/{id}/input/','SantriMutabaahController@input')->name('santri.mutabaah.input');
+    Route::post('/mutabaah/{id}/input/','SantriMutabaahController@store')->name('santri.mutabaah.store');
+    Route::get('/mutabaah/{id}/report/','SantriMutabaahController@viewMutabaahReport')->name('santri.mutabaah.see_report');
     
     Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
     Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');

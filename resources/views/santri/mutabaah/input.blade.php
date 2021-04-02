@@ -34,9 +34,11 @@
         </div>
     </div>
 
-    <form id="formMutabaah" class="row" action="{{route('santri.mutabaah.store',$widget['mutabaahCurrent']->id)}}" method="post">
+    <form id="formMutabaah" class="row" action="{{ route('santri.mutabaah.store', $widget['mutabaahCurrent']->id) }}"
+        method="post">
         @csrf
-        <input type="hidden" name="santri_id" value="{{Auth::guard('santri')->user()->id}}">
+        <input type="hidden" name="santri_id" value="{{ Auth::guard('santri')->user()->id }}">
+        <input type="hidden" name="mutabaah_id" value="{{ $widget['mutabaahCurrent']->id }}">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -65,9 +67,9 @@
                                         <td>{{ $item->nama_kegiatan }}</td>
                                         <td>
                                             <div class="custom-switch custom-switch-label-yesno text-center">
-                                                <input type="hidden" name="activity[{{$item->id}}][]" value="0" />
-                                                <input class="custom-switch-input" name="activity[{{$item->id}}][]"  id="toggle_{{ $loop->iteration }}"
-                                                    type="checkbox">
+                                                <input type="hidden" name="activity[{{ $item->id }}]" value="0" />
+                                                <input class="custom-switch-input" name="activity[{{ $item->id }}]"
+                                                    id="toggle_{{ $loop->iteration }}" type="checkbox">
                                                 <label class="custom-switch-btn" for="toggle_{{ $loop->iteration }}"></label>
                                                 <div style="margin-top: 20px" class="custom-switch-content-checked text-center">
                                                     <span class="text-success">Ya</span>

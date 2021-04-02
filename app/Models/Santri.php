@@ -9,7 +9,7 @@ class Santri extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = "santris";
+    protected $table = "santri";
     protected $fillable = [
         "nama",
         "nis",

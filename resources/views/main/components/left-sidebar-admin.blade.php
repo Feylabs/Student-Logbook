@@ -20,12 +20,34 @@
                             class="hide-menu">Manage Jadwal
                         </span></a>
                 </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Laporan Mutaba'ah</span></li>
 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/data/mutabaah/preview') }}"
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('admin/data/mutabaah/report/check') }}"
+                        aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Seluruh Santri
+                        </span>
+                    </a>
+                </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">MP3 Streaming</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('admin/data/mp3/') }}"
+                        aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">MP3 Streaming
+                        </span>
+                    </a>
+                </li>
+
+                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/data/mutabaah/preview') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                             class="hide-menu">Preview Mutabaah
                         </span></a>
-                </li>
+                </li> --}}
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Data</span></li>

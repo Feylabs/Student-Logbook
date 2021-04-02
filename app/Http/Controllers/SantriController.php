@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SantriAllExport;
+use App\Exports\SantriMutabaahDailyeExport;
+use App\Exports\SantriMutabaahDailyExport;
+use App\Exports\SantriMutabaahDailyReport;
+use App\Models\Mutabaah;
 use App\Models\Santri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class SantriController extends Controller
@@ -46,9 +52,9 @@ class SantriController extends Controller
     {
 
         $santri = Santri::find($id);
-        $classes = DB::select("SELECT kelas from santris GROUP BY kelas");
-        $jenjang = DB::select("SELECT jenjang from santris GROUP BY jenjang");
-        $asrama = DB::select("SELECT asrama from santris GROUP BY asrama");
+        $classes = DB::select("SELECT kelas from santri GROUP BY kelas");
+        $jenjang = DB::select("SELECT jenjang from santri GROUP BY jenjang");
+        $asrama = DB::select("SELECT asrama from santri GROUP BY asrama");
         $widget = [
             "santri" => $santri,
             "jenjang" => $jenjang,
@@ -65,9 +71,9 @@ class SantriController extends Controller
         $santri = Santri::findOrFail($id);
         $santri->delete();
 
-        $santriAll= Santri::all();
-        $santriSMP = $santriAll->where('jenjang','=','SMP');
-        $santriSMA = $santriAll->where('jenjang','=','SMA');
+        $santriAll = Santri::all();
+        $santriSMP = $santriAll->where('jenjang', '=', 'SMP');
+        $santriSMA = $santriAll->where('jenjang', '=', 'SMA');
 
         $widget = [
             "countSantri" => $santriAll->count(),
@@ -114,5 +120,50 @@ class SantriController extends Controller
         } else {
             return back()->with(["error" => "Gagal Mengupdate Data Santri"]);
         }
+    }
+
+    public function laporanExcel(Request $request)
+    {
+        $santriID = $request->input('santri_id');
+        $mutabaahID = $request->input('mutabaah_id');
+        $santri = Santri::find($santriID);
+        $mutabaah = Mutabaah::find($mutabaahID);
+
+
+
+        
+
+        return Excel::download(
+            new SantriMutabaahDailyReport($santriID, $mutabaahID),
+            "$mutabaah->judul" . "_" ."$mutabaah->tanggal". "_$santri->nama" . ".xlsx"
+        );
+    }
+
+
+
+    public function laporanExcelAll(Request $request)
+    {
+        $rules = [
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date',
+            'santri_id' => 'required',
+        ];
+        $customMessages = [
+            'required' => 'Mohon Isi Kolom :attribute terlebih dahulu',
+            'after' => 'Tanggal selesai harus setelah tanggal mulai'
+        ];
+
+    
+        $this->validate($request, $rules, $customMessages);
+
+        $santriID = $request->input('santri_id');
+        $start = $request->tanggal_mulai;
+        $end = $request->tanggal_selesai;
+        $santri = Santri::find($santriID);
+
+        return Excel::download(
+            new SantriAllExport($santriID,$start,$end),
+            "Laporan Mutaba'ah"."_$santri->nama" . ".xlsx"
+        );
     }
 }
