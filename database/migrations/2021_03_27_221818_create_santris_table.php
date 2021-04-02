@@ -13,8 +13,8 @@ class CreateSantrisTable extends Migration
      */
     public function up()
     {
-        Schema::create('santris', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('santri', function (Blueprint $table) {
+            $table->id();
             $table->string('nama');
             $table->string('nis')->unique();
             $table->string('password');
@@ -25,8 +25,8 @@ class CreateSantrisTable extends Migration
             $table->string('jenjang')->nullable();
             $table->string('line_id')->nullable();
             $table->string('photo_path')->nullable();
-            $table->unsignedBigInteger('mentor_id');
-            $table->foreign('mentor_id')->references('id')->on('admin')->onDelete('cascade');
+            $table->unsignedBigInteger('mentor_id')->nullable();
+            $table->foreign('mentor_id')->references('id')->on('admins')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -39,6 +39,6 @@ class CreateSantrisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('santris');
+        Schema::dropIfExists('santri');
     }
 }

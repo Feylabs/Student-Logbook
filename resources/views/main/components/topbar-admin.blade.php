@@ -43,7 +43,7 @@
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                <!-- Notification -->
+                {{-- <!-- Notification -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)" id="bell"
                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -142,7 +142,7 @@
                             </select>
                         </div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
             <!-- ============================================================== -->
             <!-- Right side toggle and nav items -->

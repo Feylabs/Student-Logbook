@@ -40,9 +40,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h1 class="text-dark">Menampilkan Agenda Mutab'ah</h1>
-                            <p>Agenda Yang Tersedia Untuk Diinput <br>
-                                <strong>Pastikan Untuk Menginput Pada Tanggal yang ditentukan</strong>
+                            <h1 class="text-dark">Agenda Mutaba'ah</h1>
+                            <p>Klik tombol lihat laporan untuk melihat detail lembar mutaba'ah<br>
                             </p>
                         </div>
 
@@ -62,6 +61,9 @@
                             </thead>
                             <tbody>
                                 @forelse ($widget['mutabaahProcessed'] as $item)
+                                    @if ($item['inputed'] == 1)
+
+                                    @endif
 
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
@@ -69,28 +71,23 @@
                                         <td>{{ $item['tanggal'] }}</td>
                                         <td>
                                             @if ($item['inputed'] == 1)
-
-                                                <button onclick="alertAlreadyInput()" type="button"
-                                                    class="btn btn-success btn-rounded">
-                                                    <i class="  far fa-check-circle"></i>
-                                                    Lembar Mutabaah Sudah Diisi</button>
-
-
+                                                <a href="{{route('santri.mutabaah.see_report',['id'=>$item['id']])}}">
+                                                    <button type="button" class="btn btn-block btn-success btn-rounded"><i
+                                                            class="fas fa-check"></i> Lihat Laporan</button>
+                                                </a>
                                             @else
                                                 @if ($item['status'] == 1)
-                                                    <a href="{{ route('santri.mutabaah.input', $item['id']) }}">
-                                                        <button type="button" class="btn btn-primary btn-rounded"><i
-                                                                class="fas fa-pen-square"></i> Isi Lembar
-                                                            Mutaba'ah</button>
-                                                    </a>
+                                                    <button type="button" class="btn btn-block btn-danger btn-rounded">
+                                                        <i class=" fas fa-times-circle"></i>
+                                                        Lembar Mutaba'ah Belum Diisi</button>
+                                                    </button>
                                                 @endif
 
                                                 @if ($item['status'] == 0)
-                                                    <button disabled type="button" class="btn btn-warning disabled mr-4">Status
-                                                        :
+                                                    <button disabled type="button" class="btn btn-block btn-danger disabled mr-4">Status :
                                                         Ditutup</button>
                                                     <a href="{{ route('santri.mutabaah.input', $item['id']) }}">
-                                                        <button type="button" class="btn btn-outline-warning disabled">Lembar
+                                                        <button type="button" class="btn btn-outline-danger disabled">Lembar
                                                             Mutabaah
                                                             Ditutup</button>
                                                     </a>
@@ -150,10 +147,6 @@
 </script>
 
 <script type="text/javascript">
-    function alertAlreadyInput() {
-        swal("Lembar Mutabaah Ini Sudah Diisi", "", "error");
-    }
-
     $(function() {
         var table = $('#table_data').DataTable({
             processing: true,
@@ -169,38 +162,10 @@
             ],
             buttons: [
                 'copyHtml5',
-                {
-                    extend: 'excelHtml5',
-                    title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
-                },
-                'csvHtml5',
             ],
 
         });
 
-        $('body').on("click", ".btn-delete", function() {
-            var id = $(this).attr("id")
-            $(".btn-destroy").attr("id", id)
-            $("#destroy-modal").modal("show")
-        });
-
-
-        // Edit & Update
-        $('body').on("click", ".btn-edit", function() {
-            var id = $(this).attr("id")
-            $.ajax({
-                url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
-                method: "GET",
-                success: function(response) {
-                    $("#edit-modal").modal("show")
-                    console.log(response)
-                    $("#id").val(response.id)
-                    $("#name").val(response.judul)
-                    $("#edit_date").val(response.tanggal)
-                    $("#role").val(response.role)
-                }
-            })
-        });
 
 
 

@@ -31,9 +31,9 @@
             <!-- ============================================================== -->
             <!-- Toggle which is visible on mobile only -->
             <!-- ============================================================== -->
-            <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+            {{-- <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
                 data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a> --}}
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -44,7 +44,7 @@
             <!-- ============================================================== -->
             <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
                 <!-- Notification -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)" id="bell"
                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span><i data-feather="bell" class="svg-icon"></i></span>
@@ -114,12 +114,12 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <!-- End Notification -->
                 <!-- ============================================================== -->
                 <!-- create new -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i data-feather="settings" class="svg-icon"></i>
@@ -130,8 +130,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li>
-                <li class="nav-item d-none d-md-block">
+                </li> --}}
+                {{-- <li class="nav-item d-none d-md-block">
                     <a class="nav-link" href="javascript:void(0)">
                         <div class="customize-input">
                             <select class="custom-select form-control bg-white custom-radius custom-shadow border-0">
@@ -142,7 +142,7 @@
                             </select>
                         </div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
             <!-- ============================================================== -->
             <!-- Right side toggle and nav items -->

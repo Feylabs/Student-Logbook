@@ -12,6 +12,13 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::get('/data/mutabaah/create','MutabaahController@viewAdminCreate');
     Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
     Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');
+
+    Route::any('/data/mp3','MutabaahController@viewAdminPreview');
+
+    Route::post('/data/mutabaah/report/check','AdminReportMutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');
+    Route::get('/data/mutabaah/report/check','AdminReportMutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');
+
+
     Route::any('/data/santri/manage','SantriController@viewAdminManage');
     Route::any('/data/santri/{id}/edit','SantriController@viewAdminEdit');
 
