@@ -175,8 +175,12 @@ class SantriMutabaahController extends Controller
         $santriID = $this->getSantriID();
         $mutabaah = Mutabaah::all();
         $recordMutabaah = SantriMutabaahRecord::where('santri_id', '=', $santriID);
+        $recordMutabaahFirst = SantriMutabaahRecord::where('santri_id', '=', $santriID)->first();
+        $recordMutabaahFirstID = $recordMutabaahFirst->mutabaah_id;
+
+        
         $activityDetail = array();
-        $activity = Activity::where('mutabaah_id', '=', $recordMutabaah->first()->id)->get();
+        $activity = Activity::where('mutabaah_id', '=', $recordMutabaahFirstID)->get();
         if ($request->has('start')) {
          
             $rules = [
@@ -207,8 +211,7 @@ class SantriMutabaahController extends Controller
 
         foreach ($mutabaah as $key) {
             $record = SantriMutabaahRecord::where('santri_id', '=', $santriID);
-            $activityDetail[$key->id] =
-                $record->where('mutabaah_id', '=', $key->id)->get();
+            $activityDetail[$key->id] = $record->where('mutabaah_id', '=', $key->id)->get();
         }
 
 
@@ -220,6 +223,8 @@ class SantriMutabaahController extends Controller
             "start" => $start,
             "end" => $end,
         ];
+
+        return $widget;
 
 
         return view('santri.mutabaah.report_all')

@@ -21,11 +21,12 @@
                         </span></a>
                 </li>
 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/report/all') }}"
+                {{-- Closed due tu bug,  --}}
+                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/report/all') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                             class="hide-menu">Seluruh Report
                         </span></a>
-                </li>
+                </li> --}}
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Streaming MP3</span></li>

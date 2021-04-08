@@ -188,7 +188,7 @@
                                                     @endphp
                                                 @endif
                                                 @if ($widget['activityScore'][$itemMutabaah->id][$counter]->status == 1)
-                                                    <button type="button" class="btn btn-block btn-primary btn-rounded"><i
+                                                    <button type="button" class="btn btn-block btn-success btn-rounded"><i
                                                             class="fas fa-times-circle"></i> Ya </button>
                                                 @endif
                                             </td>

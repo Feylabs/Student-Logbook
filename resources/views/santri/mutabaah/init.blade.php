@@ -15,11 +15,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
+            
             </div>
         </div>
     </div>
@@ -86,14 +82,7 @@
                                                 @endif
 
                                                 @if ($item['status'] == 0)
-                                                    <button disabled type="button" class="btn btn-warning disabled mr-4">Status
-                                                        :
-                                                        Ditutup</button>
-                                                    <a href="{{ route('santri.mutabaah.input', $item['id']) }}">
-                                                        <button type="button" class="btn btn-outline-warning disabled">Lembar
-                                                            Mutabaah
-                                                            Ditutup</button>
-                                                    </a>
+                                                    <button disabled type="button" class="btn btn-warning disabled mr-4">Akses Ditutup</button>
                                                 @endif
 
                                                 @if ($item['status'] == 2)

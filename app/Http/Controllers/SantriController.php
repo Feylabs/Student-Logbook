@@ -38,7 +38,8 @@ class SantriController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex"><a href="' . url("admin/data/santri/$row->id/edit") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Edit</a>';
-                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a></div>';
+                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a>';
+                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-warning btn-sm ml-2 btn-res-pass">Reset Password</a></div>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -81,6 +82,17 @@ class SantriController extends Controller
             "countSMP" => $santriSMA->count(),
         ];
         return $widget;
+    }
+
+
+    function resetPassword(Request $request)
+    {
+        $id = $request->id;
+        $santri = Santri::findOrFail($id);
+        //New Password is AlbinaaIBS
+        $santri->password = '$2y$12$yEeLQTZtnfT77kjbTSFHJuSCD4g3Q6J1T9ourXCb.T8wpDZerCGW.';
+        $santri->save();
+     
     }
 
 
@@ -128,8 +140,6 @@ class SantriController extends Controller
         $mutabaahID = $request->input('mutabaah_id');
         $santri = Santri::find($santriID);
         $mutabaah = Mutabaah::find($mutabaahID);
-
-
 
         
 
