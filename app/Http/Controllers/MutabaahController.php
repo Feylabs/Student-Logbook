@@ -153,6 +153,5 @@ class MutabaahController extends Controller
             return back()->with(["success" => "Berhasil Menginput Agenda Mutabaah"]);
         }
 
-        dd($request->all());
     }
 }

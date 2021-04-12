@@ -20,6 +20,7 @@ class AdminSeeder extends Seeder
         $data->photo_path = "";
         $data->email = "henryaugusta4@gmail.com";
         $data->password = bcrypt("henryaugusta");
+        $data->role = "admin";
         $data->save();
 
         $data = new Admin();
@@ -28,6 +29,7 @@ class AdminSeeder extends Seeder
         $data->photo_path = "";
         $data->email = "firriezky@gmail.com";
         $data->password = bcrypt("firriezky");
+        $data->role = "admin";
         $data->save();
     }
 }

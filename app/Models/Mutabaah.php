@@ -15,9 +15,13 @@ class Mutabaah extends Model
     	return $this->belongsTo(Admin::class,'id');
     }
 
-    // public function activity(){
-    // 	return $this->hasMany(Activity::class,'mutabaah_id');
-    // }
+    public function activity(){
+    	return $this->hasMany(Activity::class,'mutabaah_id');
+    }
+
+    public function record(){
+    	return $this->hasMany(SantriMutabaahRecord::class,'mutabaah_id');
+    }
 
     protected $fillable =[
         "judul","status","tanggal","created_by","deleted_by","deleted_at"

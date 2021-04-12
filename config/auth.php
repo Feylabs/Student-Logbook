@@ -51,6 +51,11 @@ return [
             'provider' => 'admins',
         ],
 
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'gurus',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -87,6 +92,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'gurus' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guru::class,
         ],
 
 

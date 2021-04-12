@@ -43,7 +43,7 @@
             <!-- toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                <!-- Notification -->
+                {{-- <!-- Notification -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)" id="bell"
                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -142,7 +142,7 @@
                             </select>
                         </div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
             <!-- ============================================================== -->
             <!-- Right side toggle and nav items -->
@@ -178,16 +178,7 @@
                         <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
                                 class="svg-icon mr-2 ml-1"></i>
                             My Profile</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
-                                class="svg-icon mr-2 ml-1"></i>
-                            My Balance</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                                class="svg-icon mr-2 ml-1"></i>
-                            Inbox</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
-                                class="svg-icon mr-2 ml-1"></i>
-                            Account Setting</a>
+                      
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

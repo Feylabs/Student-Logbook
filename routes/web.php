@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 include __DIR__.'/adminmart.php';
 include __DIR__.'/user_admin.php';
+include __DIR__.'/user_santri.php';
+include __DIR__.'/user_guru.php';
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +20,21 @@ include __DIR__.'/user_admin.php';
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
+
+
+Route::redirect('/','/login');
 
 Route::view('login/santri','auth.login_santri');
+
 Route::view('login/admin','auth.login_admin');
 
 Route::post('/login/santri/proc', 'Auth\LoginController@santriLogin')->name('login-santri');
 Route::post('/login/admin/proc', 'Auth\LoginController@adminLogin')->name('login-admin');
-Auth::routes();
+Route::any('santri/{id}/resetPassword','SantriController@resetPassword');
+Route::any('guru/{id}/resetPassword','GuruController@resetPassword');
+
+
+Route::view('login/','auth.login_santri');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

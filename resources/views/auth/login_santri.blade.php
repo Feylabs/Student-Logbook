@@ -113,7 +113,7 @@
                         </div>
                         <h2 class="mt-3 text-center">Sign In</h2>
                         <p class="text-center">Aplikasi Mutaba'ah Harian Santri Albinaa IBS</p>
-                        <form class="mt-4" action="{{ url('/login/admin/proc') }}" method="post">
+                        <form class="mt-4" action="{{ url('/login/santri/proc') }}" method="post">
                             {{ csrf_field() }}
 
                             @if (session()->has('error'))
@@ -138,9 +138,9 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="uname">Email Admin</label>
-                                        <input class="form-control  @error('email') is-invalid @enderror" id="uname"
-                                            name="email" type="text" placeholder="Email">
+                                        <label class="text-dark" for="uname">NIS / Email</label>
+                                        <input class="form-control  @error('nis') is-invalid @enderror" id="uname"
+                                            name="nis" type="text" placeholder="Masukkan NIS">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -160,7 +160,8 @@
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
                                     Kesantrian Albinaa IBS © {{ \Carbon\Carbon::now()->year }} <br>
-                                    Developed by Henry Augusta
+                                    Developed by Henry Augusta <br>
+                                    <a href="{{url('/login/admin')}}"><small>Klik Disini Untuk Login Admin</small></a>
                                 </div>
                             </div>
                         </form>

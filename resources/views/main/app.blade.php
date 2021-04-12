@@ -17,7 +17,12 @@
     <link href="{{ URL::to('bootstrap_ui') }}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css"
         rel="stylesheet" />
 
+    <!-- Toggle -->
+    <link href="{{ URL::to('bootstrap_ui') }}/assets/libs/toggle_switch/dist/css/component-custom-switch.min.css"
+        rel="stylesheet">
+
     <link href="{{ url('bower_components/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ url('bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
     @yield('style')
 
@@ -52,6 +57,14 @@
         @if (Auth::guard('admin')->check())
             @include('main.components.topbar-admin')
         @endif
+
+        @if (Auth::guard('santri')->check())
+            @include('main.components.topbar-santri')
+        @endif
+
+        @if (Auth::guard('guru')->check())
+            @include('main.components.topbar-guru')
+        @endif
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -60,6 +73,12 @@
         <!-- ============================================================== -->
         @if (Auth::guard('admin')->check())
             @include('main.components.left-sidebar-admin')
+        @endif
+        @if (Auth::guard('santri')->check())
+            @include('main.components.left-sidebar-santri')
+        @endif
+        @if (Auth::guard('guru')->check())
+            @include('main.components.left-sidebar-guru')
         @endif
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
@@ -131,6 +150,9 @@
     </script>
 
     <script src="{{ url('bower_components/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <link href="{{ url('bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js') }}" rel="stylesheet">
+
+
     {{-- <script src="sweetalert2.all.min.js"></script>
     <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
     <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script> --}}
@@ -138,6 +160,10 @@
 
 
     @yield('app-script')
+
+    <script>
+        // document.body.style.zoom = 0.8
+    </script>
 
 
 </body>
