@@ -9,30 +9,33 @@ Route::get('/santri/mutabaah/export/all', 'SantriController@laporanExcelAll')->n
 
 Route::post('/santri/update_password', 'SantriController@santriChangePassword');
 
-Route::prefix('santri')->group(function () {
-    // Route::get('/','HomeSantriController@index');
-    Route::get('/','Mp3StreamingController@viewSantriPreview');
+Route::middleware(['santri'])->group(function () {
 
-
-    Route::view('/data/santri/import','admin.santri.import');
-    Route::get('/profile','santriController@santriViewProfile');
-
-    Route::any('/mp3','Mp3StreamingController@viewSantriPreview');
-
-    Route::get('/mutabaah/input','SantriMutabaahController@viewSantriInit');
-    Route::get('/mutabaah/report','SantriMutabaahController@viewSantriReport');
-    Route::get('/mutabaah/report/all','SantriMutabaahController@viewSantriReportAll')->name('santri.mutabaah.see_report_all');;
+    Route::prefix('santri')->group(function () {
+        // Route::get('/','HomeSantriController@index');
+        Route::get('/','Mp3StreamingController@viewSantriPreview');
     
-    Route::get('/mutabaah/{id}/input/','SantriMutabaahController@input')->name('santri.mutabaah.input');
-    Route::post('/mutabaah/{id}/input/','SantriMutabaahController@store')->name('santri.mutabaah.store');
-    Route::get('/mutabaah/{id}/report/','SantriMutabaahController@viewMutabaahReport')->name('santri.mutabaah.see_report');
+        Route::view('/data/santri/import','admin.santri.import');
+        Route::get('/profile','santriController@santriViewProfile');
     
-    Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
-    Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');
-    Route::any('/data/santri/manage','SantriController@viewAdminManage');
-    Route::any('/data/santri/{id}/edit','SantriController@viewAdminEdit');
-
-
+        Route::any('/mp3','Mp3StreamingController@viewSantriPreview');
+    
+        Route::get('/mutabaah/input','SantriMutabaahController@viewSantriInit');
+        Route::get('/mutabaah/report','SantriMutabaahController@viewSantriReport');
+        Route::get('/mutabaah/report/all','SantriMutabaahController@viewSantriReportAll')->name('santri.mutabaah.see_report_all');;
+        
+        Route::get('/mutabaah/{id}/input/','SantriMutabaahController@input')->name('santri.mutabaah.input');
+        Route::post('/mutabaah/{id}/input/','SantriMutabaahController@store')->name('santri.mutabaah.store');
+        Route::get('/mutabaah/{id}/report/','SantriMutabaahController@viewMutabaahReport')->name('santri.mutabaah.see_report');
+        
+        Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
+        Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');
+        Route::any('/data/santri/manage','SantriController@viewAdminManage');
+        Route::any('/data/santri/{id}/edit','SantriController@viewAdminEdit');
+    
+    
+    });
+    
 });
 
 

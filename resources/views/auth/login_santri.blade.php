@@ -160,7 +160,6 @@
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
                                     Kesantrian Albinaa IBS © {{ \Carbon\Carbon::now()->year }} <br>
-                                    Developed by Henry Augusta <br>
                                     <a href="{{url('/login/admin')}}"><small>Klik Disini Untuk Login Admin</small></a>
                                 </div>
                             </div>

@@ -97,7 +97,7 @@
                     <h6 class="card-subtitle">
                         Daftar Santri Albinaa, Edit data dengan tombol di sisi kanan
                     </h6>
-                    <button type="button" class="btn btn-outline-primary mb-2 btn-add-new">Tambah Data Santri Baru</button>
+                    {{-- <button type="button" class="btn btn-outline-primary mb-2 btn-add-new">Tambah Data Santri Baru</button> --}}
 
                     <div class="table-responsive">
                         <table id="table_santri" class="table table-hover table-success table-bordered display no-wrap"

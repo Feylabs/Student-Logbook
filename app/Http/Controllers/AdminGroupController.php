@@ -14,7 +14,6 @@ class AdminGroupController extends Controller
 {
     function viewAdminCreate()
     {
-
         $santri = Santri::where('group_id', '=', null)->get();
         $guru = Guru::all('*');
         $widget = [
@@ -61,11 +60,11 @@ class AdminGroupController extends Controller
         $countGroup = KelompokTahfidz::all()->count();
         $countGuru = Guru::all()->count();
         
-        $widget=[
-            "countGroup" => $countGroup,
-            "countGuru" => $countGuru,
-        ];
-        return $widget;
+        if ($object) {
+            return back()->with(["success"=>"Berhasil Menghapus Anggota Kelompok"]);
+        }else{
+            return back()->with(["failed"=>"Gagal Menghapus Kelompok"]);
+        }
     }
 
 
