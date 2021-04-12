@@ -26,6 +26,7 @@ Auth::routes();
 Route::redirect('/','/login');
 
 Route::get('login/','Auth\LoginController@indexSantri');
+Route::get('login/santri','Auth\LoginController@indexSantri');
 Route::get('login/admin','Auth\LoginController@indexAdmin');
 
 
