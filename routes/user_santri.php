@@ -17,7 +17,7 @@ Route::prefix('santri')->group(function () {
 
 
     Route::view('/data/santri/import','admin.santri.import');
-    Route::get('/profile','santriController@santriViewProfile');
+    Route::get('/profile','SantriController@santriViewProfile');
 
     Route::any('/mp3','Mp3StreamingController@viewSantriPreview');
 
