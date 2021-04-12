@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Santri</h4>
+            <h2 class="page-title text-truncate text-dark font-weight-medium mb-1">Guru</h2>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Santri</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage Data Santri</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Guru</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Manage Data Guru</li>
                     </ol>
                 </nav>
             </div>
@@ -55,10 +55,10 @@
                     <div class="card-body">
                         <div class="d-flex d-lg-flex d-md-block align-items-center">
                             <div>
-                                <h2 id="widgetCountSMP" class="text-dark mb-1 w-100 text-truncate font-weight-medium">
-                                    {{ $widget['countSMP'] }}
+                                <h2 id="widgetCountAsatidz" class="text-dark mb-1 w-100 text-truncate font-weight-medium">
+                                    {{ $widget['countAsatidz'] }}
                                 </h2>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMP
+                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Asatidz
                                 </h6>
                             </div>
                             <div class="ml-auto mt-md-3 mt-lg-0">
@@ -93,23 +93,22 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Manage Data Santri</h4>
+                    <h4 class="card-title">Manage Data Guru</h4>
                     <h6 class="card-subtitle">
-                        Daftar Santri Albinaa, Edit data dengan tombol di sisi kanan
+                        Daftar Asatidz Albinaa, Edit data dengan tombol di sisi kanan
                     </h6>
-                    <button type="button" class="btn btn-outline-primary mb-2 btn-add-new">Tambah Data Santri Baru</button>
+
+                    <button type="button" class="btn btn-outline-primary mb-2 btn-add-new">Tambah Data Asatidz</button>
 
                     <div class="table-responsive">
-                        <table id="table_santri" class="table table-hover table-success table-bordered display no-wrap"
+                        <table id="table_data" class="table table-hover table-success table-bordered display no-wrap"
                             style="width:100%">
                             <thead class="bg-success text-white">
                                 <tr>
                                     <th>No</th>
-                                    <th>NIS</th>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
-                                    <th>Asrama</th>
-                                    <th>Jenjang</th>
+                                    <th>Nama Asatidz</th>
+                                    <th>Email Asatidz</th>
+                                    <th>Nomor Whatsapp</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -126,50 +125,55 @@
         </div>
     </div>
 
-    <!-- Modal Edit -->
-    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel"
+    <!-- Modal Add New -->
+    <div class="modal fade" id="insert-modal" tabindex="-1" role="dialog" aria-labelledby="insert-modalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="edit-modalLabel">Edit Data</h5>
+                    <h5 class="modal-title" id="edit-modalLabel">Tambah Data Guru Baru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editForm">
-                        <div class="form-group">
-                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
-                            <input type="hidden" required="" id="id" name="id" class="form-control">
-                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
-                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
-                        </div>
+                    <input type="hidden" name="id_for_insert">
+                    <div class="form-group">
+                        <label for="name">Nama Ustadz</label>
+                        <input type="hidden" required="" name="txt_in_name" class="form-control">
+                        <input type="" required="" id="txt_in_name" placeholder="Nama Lengkap Asatidz" name="name"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <strong>(Digunakan Untuk Login)</strong></label>
+                        <input type="hidden" required="" class="form-control">
+                        <input type="" required="" id="txt_in_email" placeholder="Email Asatidz" name="email"
+                            class="form-control">
+                        <small>Isi Dengan nama_ustadz@albinaa.com jika tidak ada email ustadz</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact Whatsapp</label>
+                        <input type="hidden" required="" name="txt_in_contact" class="form-control">
+                        <input type="" required="" id="txt_in_contact" placeholder="Kontak Whatsapp" name="contact"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Password Guru (min 6 karakter)</label>
+                        <input type="hidden" required="" id="txt_in_password" name="txt_in_password" class="form-control">
+                        <input type="" required="" id="contact" placeholder="Password Guru" name="contact"
+                            class="form-control">
+                    </div>
 
 
-                        <div class="form-group">
-                            <label for="">Ganti Status Mutaba'ah</label>
-                            <select class="form-control" required name="status" id="new_status">
-                                <option value="">Pilih Status</option>
-                                <option value="1">Dibuka</option>
-                                <option value="0">Ditutup</option>
-                                <option value="3">Pending</option>
-                            </select>
-                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-update">Update</button>
-                    </form>
+                    <button type="submit" class="btn btn-primary btn-insert">Tambah Data</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Edit -->
+    <!-- Modal Add New -->
 
     <!-- Destroy Modal -->
     <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
@@ -177,14 +181,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Data Santri Ini ?</h5>
+                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Data Ustadz Ini ?</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Aksi Ini akan menghapus seluruh mutaba'ah yang sudah dikumpulkan santri</h5>
+                    <h5>Aksi Ini akan menghapus seluruh data yang terkait dengan asatidz terkait</h5>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -208,7 +212,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Password Siswa Akan Direset Menjadi AlbinaaIBS</h5>
+                    <h5>Password Guru Akan Direset Menjadi AlbinaaIBS!</h5>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -217,52 +221,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Modal Add New -->
-    <div class="modal fade" id="insert-modal" tabindex="-1" role="dialog" aria-labelledby="insert-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit-modalLabel">Tambah Data Guru Baru</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <div class="form-group">
-                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
-                            <input type="hidden" required="" id="id" name="id" class="form-control">
-                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
-                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="">Ganti Status Mutaba'ah</label>
-                            <select class="form-control" required name="status" id="new_status">
-                                <option value="">Pilih Status</option>
-                                <option value="1">Dibuka</option>
-                                <option value="0">Ditutup</option>
-                                <option value="3">Pending</option>
-                            </select>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-update">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Add New -->
 
 
 
@@ -290,7 +248,7 @@
 
     <script type="text/javascript">
         $(function() {
-            var table = $('#table_santri').DataTable({
+            var table = $('#table_data').DataTable({
                 processing: true,
                 serverSide: true,
                 columnDefs: [{
@@ -312,7 +270,7 @@
                 ],
                 ajax: {
                     type: "get",
-                    url: "{{ url('admin/data/santri/manage') }}",
+                    url: "{{ url('admin/data/guru/manage') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                     },
@@ -327,24 +285,17 @@
                         name: 'id'
                     },
                     {
-                        data: 'nis',
-                        name: 'nis'
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        data: 'nama',
-                        name: 'nama'
+                        data: 'email',
+                        name: 'email'
                     },
+
                     {
-                        data: 'kelas',
-                        name: 'kelas'
-                    },
-                    {
-                        data: 'asrama',
-                        name: 'asrama'
-                    },
-                    {
-                        data: 'jenjang',
-                        name: 'jenjang'
+                        data: 'contact',
+                        name: 'contact'
                     },
                     {
                         data: 'action',
@@ -362,9 +313,9 @@
                 $("#destroy-modal").modal("show")
             });
 
+
             $('body').on("click", ".btn-add-new", function() {
                 var id = $(this).attr("id")
-                $(".btn-destroy").attr("id", id)
                 $("#insert-modal").modal("show")
             });
 
@@ -400,7 +351,7 @@
             var id = $(this).attr("id")
             console.log(id);
             $.ajax({
-                url: "{{ URL::to('/') }}/santri/" + id + "/deleteAjax",
+                url: "{{ URL::to('/') }}/guru/" + id + "/adminDelete",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "user_id": {{ Auth::guard('admin')->user()->id }},
@@ -410,25 +361,97 @@
                 success: function(response) {
                     console.log(response);
                     $("#destroy-modal").modal("hide")
-                    $('#table_santri').DataTable().ajax.reload();
-                    $("#widgetCountSMA").text(response.countSMA)
-                    $("#widgetCountSMP").text(response.countSMP)
-                    $("#widgetCountSantri").text(response.countSantri)
-                    swal("Sukses", "Berhasil Menghapus Data Santri ", "success");
+                    $("#widgetCountaAsatidz").text(response.countSMA)
+                    $('#table_data').DataTable().ajax.reload();
+
+                    if (response == 0) {
+                        swal("Error", "Gagal Menghapus Data Guru ", "error");
+                    } else {
+                        $('#widgetCountAsatidz').text(response.toString())
+                        swal("Sukses", "Berhasil Menghapus Data Ustadz ", "success");
+                        
+
+                    }
+                    $("#insert-modal").modal("hide")
+
                 },
                 error: function(xhr, error, code) {
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(error);
                     console.log(err);
-                    swal("Error", "Gagal Menghapus Data Santri ", "error");
+                    swal("Error", "Gagal Menghapus Data Guru ", "error");
                 }
             });
         })
+
+
+        $(".btn-insert").on("click", function() {
+
+            let in_name = $('#txt_in_name').val();
+            let in_email = $('#txt_in_email').val();
+            let in_password = $('#txt_in_password').val();
+            let in_contact = $('#txt_in_contact').val();
+
+            let in_error = false;
+
+            if (in_name == null) {
+                console.log("error_name")
+                in_error = true;
+            }
+
+            if (in_email == null) {
+                console.log("error_contact")
+                in_error = true;
+            }
+
+            if (in_contact == null) {
+                console.log("error_contact")
+                in_error = true;
+            }
+
+            if (in_error == true) {
+                swal("Afwan", "Mohon Melengkapi Form Input Guru Terlebih Dahulu ", "error");
+            } else {
+
+                $.ajax({
+                    url: "{{ URL::to('/') }}/guru/adminInsert",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "name": in_name,
+                        "contact": in_contact,
+                        "email": in_email,
+                        "password": in_password,
+                    },
+                    method: "POST",
+                    success: function(response) {
+                        console.log(response);
+                        if (response == 0) {
+                            swal("Error", "Gagal Menambah Data Guru ", "error");
+                        } else {
+                            $('#table_data').DataTable().ajax.reload();
+                            $('#widgetCountAsatidz').text(response.toString())
+                            swal("Sukses", "Berhasil Menambah Data Guru ", "success");
+                        }
+                        $("#insert-modal").modal("hide")
+                    },
+                    error: function(xhr, error, code) {
+                        $('#table_data').DataTable().ajax.reload();
+                        var err = eval("(" + xhr.responseText + ")");
+                        console.log(error);
+                        console.log(err);
+                        swal("Error", "Gagal Menambah Data Guru ", "error");
+                    }
+                });
+
+            }
+        })
+
+
         $(".btn-reset").on("click", function() {
             var id = $(this).attr("id")
             console.log(id);
             $.ajax({
-                url: "{{ URL::to('/') }}/santri/" + id + "/resetPassword",
+                url: "{{ URL::to('/') }}/guru/" + id + "/resetPassword",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "user_id": {{ Auth::guard('admin')->user()->id }},
@@ -438,14 +461,14 @@
                 success: function(response) {
                     console.log(response);
                     $("#edit-modal").modal("hide")
-                    $('#table_santri').DataTable().ajax.reload();
-                    swal("Sukses", "Berhasil Mengupdate Password Santri ", "success");
+                    $('#table_data').DataTable().ajax.reload();
+                    swal("Sukses", "Berhasil Mengupdate Password Guru ", "success");
                 },
                 error: function(xhr, error, code) {
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(error);
                     console.log(err);
-                    swal("Error", "Gagal Mengupdate Password Santri ", "error");
+                    swal("Error", "Gagal Mengupdate Password Guru ", "error");
                 }
             });
         })

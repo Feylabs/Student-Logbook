@@ -40,10 +40,10 @@
                             <div>
                                 <div class="d-inline-flex align-items-center">
                                     <h2 id="widgetCountSantri" class="text-dark mb-1 font-weight-medium">
-                                        {{ $widget['countSantri'] }}</h2>
+                                        {{ $widget['countGroup'] }} </h2>
 
                                 </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Santri</h6>
+                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Kelompok</h6>
                             </div>
                             <div class="ml-auto mt-md-3 mt-lg-0">
                                 <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
@@ -51,32 +51,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="card border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <h2 id="widgetCountSMP" class="text-dark mb-1 w-100 text-truncate font-weight-medium">
-                                    {{ $widget['countSMP'] }}
-                                </h2>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMP
-                                </h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="card border-right">
                     <div class="card-body">
                         <div class="d-flex d-lg-flex d-md-block align-items-center">
                             <div>
                                 <div class="d-inline-flex align-items-center">
-                                    <h2 id="widgetCountSMA" class="text-dark mb-1 font-weight-medium">
-                                        {{ $widget['countSMA'] }}</h2>
+                                    <h2 id="widgetCountGuru" class="text-dark mb-1 font-weight-medium">
+                                        {{ $widget['countGuru'] }} </h2>
 
                                 </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMA</h6>
+                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Pembimbing</h6>
                             </div>
                             <div class="ml-auto mt-md-3 mt-lg-0">
                                 <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
@@ -93,27 +78,49 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Manage Data Santri</h4>
+                    <h4 class="card-title">Manage Kelompok Tahfidz</h4>
                     <h6 class="card-subtitle">
-                        Daftar Santri Albinaa, Edit data dengan tombol di sisi kanan
+                        Daftar Kelompok Tahfidz, Edit data dengan tombol di sisi kanan
                     </h6>
-                    <button type="button" class="btn btn-outline-primary mb-2 btn-add-new">Tambah Data Santri Baru</button>
-
                     <div class="table-responsive">
-                        <table id="table_santri" class="table table-hover table-success table-bordered display no-wrap"
+                        <table id="table_group" class="table table-hover table-success table-bordered display no-wrap"
                             style="width:100%">
                             <thead class="bg-success text-white">
                                 <tr>
                                     <th>No</th>
-                                    <th>NIS</th>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
-                                    <th>Asrama</th>
-                                    <th>Jenjang</th>
+                                    <th>Nama Kelompok</th>
+                                    <th>Pembimbing</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @if ($widget['group'] != null)
+                                    @forelse ($widget['group'] as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->nama_kelompok }}</td>
+                                            <td>{{ $item->g_name }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <button id="{{ $item->id }}" type="button"
+                                                        class="btn btn-change-mentor btn-primary mr-2">Ganti
+                                                        Pembimbing</button>
+                                                    <button id="{{ $item->id }}" type="button"
+                                                        class="btn btn-danger btn-delete mr-2">Hapus
+                                                        Kelompok</button>
+                                                    <a href='{{url("group/$item->id/detail")}}'>
+                                                        <button type="button" class="btn btn-outline-primary mr-2">
+                                                            Lihat Detail</button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+
+                                @endforelse
+
+                                @endif
 
                             </tbody>
                             <tfoot>
@@ -175,94 +182,71 @@
     <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Data Santri Ini ?</h5>
+            <form action="{{url('/group/delete')}}" method="POST">
+                @csrf
+                @method('POST')
+                <input type="hidden" class="ind-group-id" name="id">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Kelompok Ini ?
+                        </h5>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Aksi Ini akan menghapus seluruh data setoran siswa dan data halaqoh lainnya yang berkaitan
+                            dengan kelompok ini</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger btn-destroy">Hapus</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <h5>Aksi Ini akan menghapus seluruh mutaba'ah yang sudah dikumpulkan santri</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger btn-destroy">Hapus</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Destroy Modal -->
+            </form>
 
-    <!-- Reset Pass Modal -->
-    <div class="modal fade" id="reset-password-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Reset Password</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5>Password Siswa Akan Direset Menjadi AlbinaaIBS</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger btn-reset">RESET</button>
-                </div>
-            </div>
         </div>
     </div>
 
-
-    <!-- Modal Add New -->
-    <div class="modal fade" id="insert-modal" tabindex="-1" role="dialog" aria-labelledby="insert-modalLabel"
+    <!-- Change Mentor Modal -->
+    <div class="modal fade" id="change-mentor-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit-modalLabel">Tambah Data Guru Baru</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <div class="form-group">
-                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
-                            <input type="hidden" required="" id="id" name="id" class="form-control">
-                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
-                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
-                        </div>
+                <form action="{{ url('group/change_mentor') }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" class="ind-group-id" name="group_id">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="destroy-modalLabel">Ganti Pembimbing Halaqoh</h5>
 
-
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
-                            <label for="">Ganti Status Mutaba'ah</label>
-                            <select class="form-control" required name="status" id="new_status">
-                                <option value="">Pilih Status</option>
-                                <option value="1">Dibuka</option>
-                                <option value="0">Ditutup</option>
-                                <option value="3">Pending</option>
+                            <label for="">Pilih Pembimbing Baru Untuk Kelompok</label>
+                            <select class="form-control" name="mentor_id" id="">
+                                @forelse ($widget['guru'] as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @empty
+
+                                @endforelse
                             </select>
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-update">Update</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-save-change-mentor"
+                            data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Ganti Pembimbing</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
-    <!-- Modal Add New -->
 
 
 
@@ -290,9 +274,9 @@
 
     <script type="text/javascript">
         $(function() {
-            var table = $('#table_santri').DataTable({
+            var table = $('#table_group').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 columnDefs: [{
                     orderable: true,
                     targets: 0
@@ -306,66 +290,25 @@
                     'copyHtml5',
                     {
                         extend: 'excelHtml5',
-                        title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
+                        title: 'Data Kelompok Tahfidz Export {{ \Carbon\Carbon::now()->year }}'
                     },
                     'csvHtml5',
                 ],
-                ajax: {
-                    type: "get",
-                    url: "{{ url('admin/data/santri/manage') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    async: true,
-                    error: function(xhr, error, code) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        console.log(err);
-                    }
-                },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'id'
-                    },
-                    {
-                        data: 'nis',
-                        name: 'nis'
-                    },
-                    {
-                        data: 'nama',
-                        name: 'nama'
-                    },
-                    {
-                        data: 'kelas',
-                        name: 'kelas'
-                    },
-                    {
-                        data: 'asrama',
-                        name: 'asrama'
-                    },
-                    {
-                        data: 'jenjang',
-                        name: 'jenjang'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: true,
-                        searchable: true
-                    },
 
-                ]
             });
 
             $('body').on("click", ".btn-delete", function() {
                 var id = $(this).attr("id")
+                $(".ind-group-id").val(id)
                 $(".btn-destroy").attr("id", id)
                 $("#destroy-modal").modal("show")
             });
 
-            $('body').on("click", ".btn-add-new", function() {
+            $('body').on("click", ".btn-change-mentor", function() {
                 var id = $(this).attr("id")
                 $(".btn-destroy").attr("id", id)
-                $("#insert-modal").modal("show")
+                $(".ind-group-id").val(id)
+                $("#change-mentor-modal").modal("show")
             });
 
 
@@ -392,38 +335,17 @@
                 $(".btn-reset").attr("id", id)
                 $("#reset-password-modal").modal("show")
             });
+            // Reset Password
+            $('body').on("click", ".btn-res-pass", function() {
+                var id = $(this).attr("id")
+                $(".btn-reset").attr("id", id)
+                $("#reset-password-modal").modal("show")
+            });
 
         });
 
 
-        $(".btn-destroy").on("click", function() {
-            var id = $(this).attr("id")
-            console.log(id);
-            $.ajax({
-                url: "{{ URL::to('/') }}/santri/" + id + "/deleteAjax",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "user_id": {{ Auth::guard('admin')->user()->id }},
-                    "id": id,
-                },
-                method: "DELETE",
-                success: function(response) {
-                    console.log(response);
-                    $("#destroy-modal").modal("hide")
-                    $('#table_santri').DataTable().ajax.reload();
-                    $("#widgetCountSMA").text(response.countSMA)
-                    $("#widgetCountSMP").text(response.countSMP)
-                    $("#widgetCountSantri").text(response.countSantri)
-                    swal("Sukses", "Berhasil Menghapus Data Santri ", "success");
-                },
-                error: function(xhr, error, code) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(error);
-                    console.log(err);
-                    swal("Error", "Gagal Menghapus Data Santri ", "error");
-                }
-            });
-        })
+
         $(".btn-reset").on("click", function() {
             var id = $(this).attr("id")
             console.log(id);

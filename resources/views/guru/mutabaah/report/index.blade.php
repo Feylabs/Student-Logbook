@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="col-lg-9 p-4">
-                            <form action="{{ route('admin.mutabaah.search_filter_all') }}" method="post">
+                            <form action="{{ route('guru.mutabaah.search_filter_all') }}" method="post">
                                 @csrf
                                 @method('POST')
 
@@ -78,15 +78,20 @@
                                             </select>
                                         </div>
                                     </div>
+                                 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="">Filter Kelas</label>
-                                            <select class="form-control" name="class_id" id="">
-                                                <option value="">Semua Kelas</option>
-                                                @foreach ($widget['classes'] as $item)
-                                                    <option @if ($widget['currentMutabaah'] != null) {{ $item->kelas == $widget['classCurrent'] ? 'selected' : '' }} @endif value="{{ $item->kelas }}">
-                                                        {{ $item->kelas }}
-                                                    </option>
+                                            <label for="">Filter Kelompok</label>
+                                            <select class="form-control" required name="kelompok_id" id="">
+                                                <option value="">Pilih Kelompok</option>
+                                                @foreach ($widget['kelompok'] as $item)
+
+                                                <option 
+                                                @if ($widget['kelompokCurrent'] != null)
+                                                 {{ $item->id == $widget['kelompokCurrent'] ? 'selected' : '' }} @endif value="{{ $item->id }}">
+                                                 {{$item->nama_kelompok}}
+                                                </option>
+
                                                 @endforeach
                                             </select>
                                         </div>
@@ -164,7 +169,7 @@
                                             <td>
                                                 @if ($itemz->status == 0)
                                                     <button type="button" class="btn btn-danger btn-rounded"><i
-                                                            class="fas fa-times-circle"></i> Tidak</button>
+                                                            class="fas fa-times-circle"></i> Tidak Dilakukan</button>
                                                 @endif
 
                                                 @if ($itemz->status == 1)
@@ -375,7 +380,6 @@
                     {
                         extend: 'pdfHtml5',
                         orientation: 'landscape',
-                        pageSize: 'A1',
                         title: 
                         '@php
                         if ($widget['currentMutabaah'] != null) {
@@ -470,7 +474,7 @@
                 url: "{{ URL::to('/') }}/mutabaah/" + id + "/deleteAjax",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "user_id": {{ Auth::guard('admin')->user()->id }},
+                    "user_id": {{ Auth::guard('guru')->user()->id }},
                     "id": id,
                 },
                 method: "DELETE",

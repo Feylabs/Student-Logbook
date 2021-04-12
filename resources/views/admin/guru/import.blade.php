@@ -7,20 +7,14 @@
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Santri</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Guru</li>
                         <li class="breadcrumb-item text-muted" aria-current="page">Import</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <div class="col-5 align-self-center">
-            <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
-            </div>
+         
         </div>
     </div>
 
@@ -41,12 +35,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary text-white rounded-top">
-                        <h4 class="mb-0 ">Upload Data Santri (CSV)</h4>
+                        <h4 class="mb-0 ">Upload Data Guru (CSV)</h4>
                     </div>
 
                     <div class="card-body">
                         <p class="card-text"></p>
-                        <form class="form" action="{{ route('import_santri') }}" method="post"
+                        <form class="form" action="{{ route('import_guru') }}" method="post"
                             enctype="multipart/form-data">
 
                             {{ csrf_field() }}
@@ -70,9 +64,13 @@
         {{-- Table Format Information --}}
         <div class="row">
             <div class="col-md-12">
-                <div class="card  card-accent-primary">
+                <div class="card-header bg-primary text-white rounded-top">
+                    <h4 class="mb-0 ">Format File Excel Guru (Excel) </h4>
+                </div>
+
+                <div class="card ">
                     <div class="card-header card-header-inverse">
-                        <p class="card-title title-collapse">Format File CSV Mentee</p>
+                        <p class="card-title title-collapse"></p>
                         <p class="card-text" style="color:#1c2d3f">Akan menolak tambahan attribut (Bold == Wajib
                             Ada)</p>
                     </div>
@@ -89,49 +87,26 @@
                                 </thead>
                                 <tbody>
 
+                               
                                     <tr>
                                         <td>1</td>
-                                        <td><strong>NIS</strong></td>
-                                        <td>Angka</td>
-                                        <td>Contoh : 1301140171</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
                                         <td><strong>Nama</strong></td>
                                         <td>Huruf</td>
                                         <td>Contoh : Henry Augusta Harsono</td>
                                     </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><strong>Kelas</strong></td>
-                                        <td>Kode Kelas</td>
-                                        <td>Contoh : 7B</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td><strong>Asrama</strong></td>
-                                        <td>String - Nama Fakultas</td>
-                                        <td>Contoh : MADINAH</td>
-                                    </tr>
+                                  
 
                                     <tr>
-                                        <td>5</td>
-                                        <td><strong>JK</strong></td>
-                                        <td>"Pria"/"Laki-laki" atau "Wanita"/"Perempuan"</td>
-                                        <td>Format Header harus JK !, selain format diatas ditolak</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>6</td>
-                                        <td>no_telp</td>
+                                        <td>2</td>
+                                        <td>Kontak Whatsapp</td>
                                         <td>String</td>
                                         <td>Contoh : 081320380666 , Boleh Dikosongkan</td>
                                     </tr>
                                     <tr>
-                                        <td>7</td>
-                                        <td>Line_id</td>
+                                        <td>3</td>
+                                        <td>Email</td>
                                         <td>String</td>
-                                        <td>Contoh : henryaugusta , Boleh Dikosongkan</td>
+                                        <td>Contoh : ahmad_suadi@gmail.com  <strong>WAJIB , Digunakan Untuk Login</strong></td>
                                     </tr>
 
                                 </tbody>
@@ -145,7 +120,10 @@
 
 
     </div>
-
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
 @endsection
 
 @section('app-script')
