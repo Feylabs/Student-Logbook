@@ -45,14 +45,12 @@
 
                             {{ csrf_field() }}
 
-                            <h4>Gunakan Menu Manage Guru Untuk Menambah Asatidz Baru</h4>
-
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label>File input (.csv)</label>
                                 <input type="file" class="form-control-file" name="file">
                                 <small class="form-text text-muted">Baca keterangan sample file excel <a
                                         href="#">berikut</a></small>
-                            </div> --}}
+                            </div>
 
                             <div class="form-group">
                                 <button class="btn btn-primary">Submit</button>
