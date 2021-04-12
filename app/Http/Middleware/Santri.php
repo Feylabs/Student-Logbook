@@ -17,10 +17,12 @@ class Santri
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('santri')->check()){
+        if(Auth::guard('admin')->check()){
 
         }else{
             abort('403');
         }
+
+        return $next($request);
     }
 }
