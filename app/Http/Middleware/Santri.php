@@ -17,7 +17,7 @@ class Santri
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('admin')->check()){
+        if(Auth::guard('santri')->check()){
 
         }else{
             abort('403');
