@@ -35,8 +35,7 @@
                 <li class="nav-small-cap"><span class="hide-menu">MP3 Streaming</span></li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('admin/data/mp3/') }}"
-                        aria-expanded="false">
+                    <a class="sidebar-link" href="{{ URL('admin/data/mp3/') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
                         <span class="hide-menu">MP3 Streaming
                         </span>
@@ -101,13 +100,16 @@
                 <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="../../docs/docs.html"
                         aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span
                             class="hide-menu">Documentation</span></a></li>
-                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="authentication-login1.html"
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();  document.getElementById('logout-form').submit();"
                         aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                             class="hide-menu">Logout</span></a></li>
-           
-           
-           
-                        </ul>
+
+            </ul>
         </nav>
         <!-- End Sidebar navigation -->
     </div>
