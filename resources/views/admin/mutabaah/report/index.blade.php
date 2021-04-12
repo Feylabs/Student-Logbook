@@ -16,11 +16,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
+
             </div>
         </div>
     </div>
@@ -39,7 +35,7 @@
                     <div class="row">
                         <div class="col-lg-3 border-right pr-0">
                             <div class="card-body border-bottom">
-                                <h4 class="card-title mt-2">Buat Agenda Mutaba'ah Baru</h4>
+                                <h4 class="card-title mt-2">Download Laporan Mutaba'ah</h4>
                             </div>
                             <div class="card-body">
 
@@ -72,15 +68,11 @@
                                             <select class="form-control" required name="agenda_id" id="">
                                                 <option value="">Pilih Agenda Mutaba'ah</option>
                                                 @foreach ($widget['mutabaah'] as $item)
-                                                    <option
-                                                    @if ($widget['currentMutabaah']!=null)
-                                                    {{$item->id == $widget['currentMutabaah']->id  ? 'selected' : ''}}                                                        
-                                                    @endif
-                                                    value="{{ $item->id }}">
-                                                        
+                                                    <option @if ($widget['currentMutabaah'] != null) {{ $item->id == $widget['currentMutabaah']->id ? 'selected' : '' }} @endif value="{{ $item->id }}">
+
                                                         {{ $item->tanggal }} :
                                                         {{ $item->judul }}
-                                                    
+
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -90,11 +82,9 @@
                                         <div class="form-group">
                                             <label for="">Filter Kelas</label>
                                             <select class="form-control" name="class_id" id="">
-                                                <option value="">Pilih Kelas Santri</option>
+                                                <option value="">Semua Kelas</option>
                                                 @foreach ($widget['classes'] as $item)
-                                                    <option
-                                                    
-                                                    value="{{ $item->kelas }}">
+                                                    <option @if ($widget['currentMutabaah'] != null) {{ $item->kelas == $widget['classCurrent'] ? 'selected' : '' }} @endif value="{{ $item->kelas }}">
                                                         {{ $item->kelas }}
                                                     </option>
                                                 @endforeach
@@ -119,18 +109,19 @@
         </div>
 
 
+
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Data Laporan Mutaba'ah : </h2>
                     <h2 class="card-title">
-                        @if ($widget['currentMutabaah']!=null)
-                        {{$widget['currentMutabaah']->judul }}                                                        
+                        @if ($widget['currentMutabaah'] != null)
+                            {{ $widget['currentMutabaah']->judul }}
                         @endif
                     </h2>
                     <h3 class="card-title">
-                        @if ($widget['currentMutabaah']!=null)
-                        Tanggal : {{$widget['currentMutabaah']->tanggal }}                                                        
+                        @if ($widget['currentMutabaah'] != null)
+                            Tanggal : {{ $widget['currentMutabaah']->tanggal }}
                         @endif
                     </h3>
                     <hr>
@@ -173,7 +164,7 @@
                                             <td>
                                                 @if ($itemz->status == 0)
                                                     <button type="button" class="btn btn-danger btn-rounded"><i
-                                                            class="fas fa-times-circle"></i> Tidak Dilakukan</button>
+                                                            class="fas fa-times-circle"></i> Tidak</button>
                                                 @endif
 
                                                 @if ($itemz->status == 1)
@@ -206,6 +197,119 @@
             </div>
         </div>
 
+        <div class="col-12">
+            <!-- *************************************************************** -->
+            <!-- Start First Cards -->
+            <!-- *************************************************************** -->
+            <div class="card-group">
+
+                <div class="card border-right">
+                    <div class="card-body">
+                        <div class="d-flex d-lg-flex d-md-block align-items-center">
+                            <div>
+                                <div class="d-inline-flex align-items-center">
+                                    <h2 class="text-dark mb-1 font-weight-medium">{{ count($widget['recordSantri']) }}
+                                    </h2>
+
+                                </div>
+                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI MENGISI MUTABA'AH
+                                </h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-right">
+                    <div class="card-body">
+                        <div class="d-flex d-lg-flex d-md-block align-items-center">
+                            <div>
+                                <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium">
+                                    {{ count($widget['santriNotFill']) }}</h2>
+                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI TIDAK MENGISI
+                                </h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex d-lg-flex d-md-block align-items-center">
+                            <div>
+                                <h2 class="text-dark mb-1 font-weight-medium">{{ count($widget['activities']) }}</h2>
+                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Aktivitas Yang
+                                    Dinilai </h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- *************************************************************** -->
+            <!-- End First Cards -->
+            <!-- *************************************************************** -->
+
+        </div>
+
+        <!-------START OF MY SOPHISTICATED STATISTIC WIDGET --------->
+        <!-------START OF MY SOPHISTICATED STATISTIC WIDGET --------->
+        <div class="col-12">
+            <div class="card">
+                <img class="card-img-top" src="holder.js/100x180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Santri Yang Tidak Mengisi Mutaba'ah</h4>
+                    <div class="table-responsive">
+                        <table id="table_record_nf" class="table table-hover table-warning table-bordered no-wrap"
+                            style="width:100%">
+                            <thead class="bg-warning text-white">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama</th>
+                                    <th>NIS</th>
+                                    <th>Kelas</th>
+                                    <th>Asrama</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($widget['santriNotFill'] != null)
+                                    @forelse ($widget['santriNotFill'] as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->nis }}</td>
+                                            <td>{{ $item->kelas }}</td>
+                                            <td>{{ $item->asrama }}</td>
+                                        </tr>
+                                    @empty
+
+                                @endforelse
+                                @endif
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-------END OF MY SOPHISTICATED STATISTIC WIDGET --------->
+        <!-------END OF MY SOPHISTICATED STATISTIC WIDGET --------->
+
+
+
+
+
+
+
     </div>
 @endsection
 
@@ -220,23 +324,69 @@
     </script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
     </script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
+    </script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
 
 
 
     <script type="text/javascript">
         $(function() {
+            var tableNotFill = $('#table_record_nf').DataTable({
+                searching: true,
+                dom: 'Tf<"clear">lrtip<"bottom"B>',
+                buttons: [{
+                        extend: 'excelHtml5',
+                        title: 'Data export'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'A1',
+                        title: 'Data export'
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        title: 'Data export'
+                    },
+                ],
+
+            });
             var table = $('#table_record').DataTable({
                 searching: true,
                 dom: 'Tf<"clear">lrtip<"bottom"B>',
-                buttons: [
-                    'copyHtml5',
-                    'excelHtml5',
-                    'csvHtml5',
+                buttons: [{
+                        extend: 'excelHtml5',
+                        title: 
+                        '@php
+                        if ($widget['currentMutabaah'] != null) {
+                            echo $widget['currentMutabaah']->judul."_".$widget['currentMutabaah']->tanggal;
+                        }else{
+                            echo "ERR! Tidak Ada Data";
+                        }
+                        @endphp'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'A1',
+                        title: 
+                        '@php
+                        if ($widget['currentMutabaah'] != null) {
+                            echo $widget['currentMutabaah']->judul."_".$widget['currentMutabaah']->tanggal;
+                        }else{
+                            echo "ERR! Tidak Ada Data";
+                        }
+                        @endphp '
+                    },
                 ],
-         
+
             });
 
             $('body').on("click", ".btn-delete", function() {
@@ -337,6 +487,9 @@
         })
 
     </script>
+
+    @include('admin.mutabaah.report.script')
+
 
 
 

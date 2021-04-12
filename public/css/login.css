@@ -3,7 +3,8 @@ body {
 }
 .background-image {
     /*background-image: url('https://images.pexels.com/photos/6462611/pexels-photo-6462611.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');*/
-    background-image: url('https://image.freepik.com/free-vector/mandala-illustration_53876-81805.jpg')  ;
+    /* background-image: url('https://image.freepik.com/free-vector/mandala-illustration_53876-81805.jpg')  ; */
+    background-image: url('https://image.freepik.com/free-photo/islamic-decoration-background-with-crescent-mosque-arabic-lantern_257995-523.jpg')  ;
     margin: 0;
     background-repeat: no-repeat;
     position: fixed;

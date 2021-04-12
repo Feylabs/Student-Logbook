@@ -9,7 +9,9 @@ use App\Exports\SantriMutabaahDailyReport;
 use App\Models\Mutabaah;
 use App\Models\Santri;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -38,7 +40,8 @@ class SantriController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex"><a href="' . url("admin/data/santri/$row->id/edit") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Edit</a>';
-                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a></div>';
+                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a>';
+                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-warning btn-sm ml-2 btn-res-pass">Reset Password</a></div>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -65,6 +68,45 @@ class SantriController extends Controller
         return view('admin.santri.edit')->with(compact('widget'));
     }
 
+    function santriViewProfile(Request $request)
+    {
+
+        $santri = Santri::find(Auth::guard('santri')->id());
+        $classes = DB::select("SELECT kelas from santri GROUP BY kelas");
+        $jenjang = DB::select("SELECT jenjang from santri GROUP BY jenjang");
+        $asrama = DB::select("SELECT asrama from santri GROUP BY asrama");
+        $widget = [
+            "santri" => $santri,
+            "jenjang" => $jenjang,
+            "classes" => $classes,
+            "asrama" => $asrama,
+        ];
+
+        return view('santri.profile')->with(compact('widget'));
+    }
+
+    function santriChangePassword(Request $request)
+    {
+        $this->validate($request, [
+            'new_password' => 'required|min:6'
+        ]);
+
+        $user = Santri::findOrFail(Auth::guard('santri')->id());
+        $hasher = app('hash');
+        if (!$hasher->check($request->old_password, $user->password)) {
+            return back()->with(["error" => "Password Lama Tidak Sesuai"]);
+        } else {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            if ($user) {
+                return back()->with(["success" => "Password Berhasil Diperbarui"]);
+            } else {
+                return back()->with(["error" => "Password Gagal Diperbarui"]);
+            }
+        }
+    }
+
     function deleteAjax(Request $request)
     {
         $id = $request->id;
@@ -81,6 +123,16 @@ class SantriController extends Controller
             "countSMP" => $santriSMA->count(),
         ];
         return $widget;
+    }
+
+
+    function resetPassword(Request $request)
+    {
+        $id = $request->id;
+        $santri = Santri::findOrFail($id);
+        //New Password is AlbinaaIBS
+        $santri->password = '$2y$12$yEeLQTZtnfT77kjbTSFHJuSCD4g3Q6J1T9ourXCb.T8wpDZerCGW.';
+        $santri->save();
     }
 
 
@@ -131,11 +183,9 @@ class SantriController extends Controller
 
 
 
-        
-
         return Excel::download(
             new SantriMutabaahDailyReport($santriID, $mutabaahID),
-            "$mutabaah->judul" . "_" ."$mutabaah->tanggal". "_$santri->nama" . ".xlsx"
+            "$mutabaah->judul" . "_" . "$mutabaah->tanggal" . "_$santri->nama" . ".xlsx"
         );
     }
 
@@ -153,7 +203,7 @@ class SantriController extends Controller
             'after' => 'Tanggal selesai harus setelah tanggal mulai'
         ];
 
-    
+
         $this->validate($request, $rules, $customMessages);
 
         $santriID = $request->input('santri_id');
@@ -162,8 +212,8 @@ class SantriController extends Controller
         $santri = Santri::find($santriID);
 
         return Excel::download(
-            new SantriAllExport($santriID,$start,$end),
-            "Laporan Mutaba'ah"."_$santri->nama" . ".xlsx"
+            new SantriAllExport($santriID, $start, $end),
+            "Laporan Mutaba'ah" . "_$santri->nama" . ".xlsx"
         );
     }
 }

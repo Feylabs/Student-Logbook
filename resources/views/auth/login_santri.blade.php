@@ -138,7 +138,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="uname">NIS Santri</label>
+                                        <label class="text-dark" for="uname">NIS / Email</label>
                                         <input class="form-control  @error('nis') is-invalid @enderror" id="uname"
                                             name="nis" type="text" placeholder="Masukkan NIS">
                                     </div>

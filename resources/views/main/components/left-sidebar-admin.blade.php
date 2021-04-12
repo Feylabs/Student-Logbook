@@ -50,17 +50,47 @@
                 </li> --}}
 
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Data</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">Data Santri</span></li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="{{ URL('/admin/data/santri/import') }}"
+                    <a class="sidebar-link sidebar-link" href="{{ url('/admin/data/santri/import') }}"
                         aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                             class="hide-menu">Import Data Santri</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="{{ URL('/admin/data/santri/manage') }}"
+                    <a class="sidebar-link sidebar-link" href="{{ url('/admin/data/santri/manage') }}"
                         aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                             class="hide-menu">Manage Data Santri</span>
+                    </a>
+                </li>
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Data Guru</span></li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{ url('/admin/data/guru/import') }}"
+                        aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
+                            class="hide-menu">Import Data Guru</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{ url('/admin/data/guru/manage') }}"
+                        aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
+                            class="hide-menu">Manage Data Guru</span>
+                    </a>
+                </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Kelompok Tahfidz</span></li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{ URL('/admin/data/group/manage') }}"
+                        aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
+                            class="hide-menu">Manage</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{ URL('/admin/data/group/create') }}"
+                        aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
+                            class="hide-menu">Buat Kelompok</span>
                     </a>
                 </li>
 
@@ -74,7 +104,10 @@
                 <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="authentication-login1.html"
                         aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                             class="hide-menu">Logout</span></a></li>
-            </ul>
+           
+           
+           
+                        </ul>
         </nav>
         <!-- End Sidebar navigation -->
     </div>

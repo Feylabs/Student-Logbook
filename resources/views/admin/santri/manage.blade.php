@@ -15,11 +15,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
+
             </div>
         </div>
     </div>
@@ -43,7 +39,8 @@
                         <div class="d-flex d-lg-flex d-md-block align-items-center">
                             <div>
                                 <div class="d-inline-flex align-items-center">
-                                    <h2 id="widgetCountSantri" class="text-dark mb-1 font-weight-medium">{{ $widget['countSantri'] }}</h2>
+                                    <h2 id="widgetCountSantri" class="text-dark mb-1 font-weight-medium">
+                                        {{ $widget['countSantri'] }}</h2>
 
                                 </div>
                                 <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Santri</h6>
@@ -58,7 +55,8 @@
                     <div class="card-body">
                         <div class="d-flex d-lg-flex d-md-block align-items-center">
                             <div>
-                                <h2 id="widgetCountSMP" class="text-dark mb-1 w-100 text-truncate font-weight-medium">{{ $widget['countSMP'] }}
+                                <h2 id="widgetCountSMP" class="text-dark mb-1 w-100 text-truncate font-weight-medium">
+                                    {{ $widget['countSMP'] }}
                                 </h2>
                                 <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMP
                                 </h6>
@@ -74,7 +72,8 @@
                         <div class="d-flex d-lg-flex d-md-block align-items-center">
                             <div>
                                 <div class="d-inline-flex align-items-center">
-                                    <h2 id="widgetCountSMA" class="text-dark mb-1 font-weight-medium">{{ $widget['countSMA'] }}</h2>
+                                    <h2 id="widgetCountSMA" class="text-dark mb-1 font-weight-medium">
+                                        {{ $widget['countSMA'] }}</h2>
 
                                 </div>
                                 <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMA</h6>
@@ -98,6 +97,8 @@
                     <h6 class="card-subtitle">
                         Daftar Santri Albinaa, Edit data dengan tombol di sisi kanan
                     </h6>
+                    <button type="button" class="btn btn-outline-primary mb-2 btn-add-new">Tambah Data Santri Baru</button>
+
                     <div class="table-responsive">
                         <table id="table_santri" class="table table-hover table-success table-bordered display no-wrap"
                             style="width:100%">
@@ -176,8 +177,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Data Santri Ini  ?</h5>
-                 
+                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Menghapus Data Santri Ini ?</h5>
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -193,6 +194,75 @@
         </div>
     </div>
     <!-- Destroy Modal -->
+
+    <!-- Reset Pass Modal -->
+    <div class="modal fade" id="reset-password-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destroy-modalLabel">Reset Password</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Password Siswa Akan Direset Menjadi AlbinaaIBS</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger btn-reset">RESET</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Add New -->
+    <div class="modal fade" id="insert-modal" tabindex="-1" role="dialog" aria-labelledby="insert-modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-modalLabel">Tambah Data Guru Baru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
+                            <input type="hidden" required="" id="id" name="id" class="form-control">
+                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
+                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="">Ganti Status Mutaba'ah</label>
+                            <select class="form-control" required name="status" id="new_status">
+                                <option value="">Pilih Status</option>
+                                <option value="1">Dibuka</option>
+                                <option value="0">Ditutup</option>
+                                <option value="3">Pending</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-update">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Add New -->
 
 
 
@@ -227,7 +297,7 @@
                     orderable: true,
                     targets: 0
                 }],
-                dom: 'lrtipB',
+                dom: 'T<"clear">lfrtip<"bottom"B>',
                 "lengthMenu": [
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
@@ -236,7 +306,7 @@
                     'copyHtml5',
                     {
                         extend: 'excelHtml5',
-                        title: 'Data Santri Export {{\Carbon\Carbon::now()->year }}'
+                        title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
                     },
                     'csvHtml5',
                 ],
@@ -292,6 +362,12 @@
                 $("#destroy-modal").modal("show")
             });
 
+            $('body').on("click", ".btn-add-new", function() {
+                var id = $(this).attr("id")
+                $(".btn-destroy").attr("id", id)
+                $("#insert-modal").modal("show")
+            });
+
 
             // Edit & Update
             $('body').on("click", ".btn-edit", function() {
@@ -308,6 +384,13 @@
                         $("#role").val(response.role)
                     }
                 })
+            });
+
+            // Reset Password
+            $('body').on("click", ".btn-res-pass", function() {
+                var id = $(this).attr("id")
+                $(".btn-reset").attr("id", id)
+                $("#reset-password-modal").modal("show")
             });
 
         });
@@ -331,13 +414,38 @@
                     $("#widgetCountSMA").text(response.countSMA)
                     $("#widgetCountSMP").text(response.countSMP)
                     $("#widgetCountSantri").text(response.countSantri)
-                    swal("Sukses", "Berhasil Menghapus Data Santri " , "success");
+                    swal("Sukses", "Berhasil Menghapus Data Santri ", "success");
                 },
                 error: function(xhr, error, code) {
                     var err = eval("(" + xhr.responseText + ")");
                     console.log(error);
                     console.log(err);
-                    swal("Error", "Gagal Menghapus Data Santri " , "error");
+                    swal("Error", "Gagal Menghapus Data Santri ", "error");
+                }
+            });
+        })
+        $(".btn-reset").on("click", function() {
+            var id = $(this).attr("id")
+            console.log(id);
+            $.ajax({
+                url: "{{ URL::to('/') }}/santri/" + id + "/resetPassword",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "user_id": {{ Auth::guard('admin')->user()->id }},
+                    "id": id,
+                },
+                method: "POST",
+                success: function(response) {
+                    console.log(response);
+                    $("#edit-modal").modal("hide")
+                    $('#table_santri').DataTable().ajax.reload();
+                    swal("Sukses", "Berhasil Mengupdate Password Santri ", "success");
+                },
+                error: function(xhr, error, code) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(error);
+                    console.log(err);
+                    swal("Error", "Gagal Mengupdate Password Santri ", "error");
                 }
             });
         })

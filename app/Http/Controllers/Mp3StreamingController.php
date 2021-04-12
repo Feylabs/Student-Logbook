@@ -105,6 +105,9 @@ class Mp3StreamingController extends Controller
 
         if ($mp3) {
             return back()->with(["success"=>"MP3 Berhasil Ditambahkan"]);
+        }else{
+            return back()->with(["error"=>"MP3 Gagal Ditambahkan"]);
+            
         }
     }
 }

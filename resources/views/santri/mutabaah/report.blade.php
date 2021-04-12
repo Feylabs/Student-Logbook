@@ -14,13 +14,7 @@
             </div>
         </div>
         <div class="col-5 align-self-center">
-            <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
-            </div>
+
         </div>
     </div>
 @endsection
@@ -71,32 +65,12 @@
                                         <td>{{ $item['tanggal'] }}</td>
                                         <td>
                                             @if ($item['inputed'] == 1)
-                                                <a href="{{route('santri.mutabaah.see_report',['id'=>$item['id']])}}">
+                                                <a href="{{ route('santri.mutabaah.see_report', ['id' => $item['id']]) }}">
                                                     <button type="button" class="btn btn-block btn-success btn-rounded"><i
                                                             class="fas fa-check"></i> Lihat Laporan</button>
                                                 </a>
                                             @else
-                                                @if ($item['status'] == 1)
-                                                    <button type="button" class="btn btn-block btn-danger btn-rounded">
-                                                        <i class=" fas fa-times-circle"></i>
-                                                        Lembar Mutaba'ah Belum Diisi</button>
-                                                    </button>
-                                                @endif
-
-                                                @if ($item['status'] == 0)
-                                                    <button disabled type="button" class="btn btn-block btn-danger disabled mr-4">Status :
-                                                        Ditutup</button>
-                                                    <a href="{{ route('santri.mutabaah.input', $item['id']) }}">
-                                                        <button type="button" class="btn btn-outline-danger disabled">Lembar
-                                                            Mutabaah
-                                                            Ditutup</button>
-                                                    </a>
-                                                @endif
-
-                                                @if ($item['status'] == 2)
-                                                    <h5 class="badge badge-warning">Pending</h5>
-                                                @endif
-
+                                                Antum Belum Mengisi Lembar Mutaba'ah Ini
                                             @endif
 
 

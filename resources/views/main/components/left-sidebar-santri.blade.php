@@ -21,11 +21,12 @@
                         </span></a>
                 </li>
 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/report/all') }}"
+                {{-- Closed due tu bug,  --}}
+                {{-- <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('santri/mutabaah/report/all') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                             class="hide-menu">Seluruh Report
                         </span></a>
-                </li>
+                </li> --}}
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Streaming MP3</span></li>
@@ -42,9 +43,12 @@
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
-                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="../../docs/docs.html"
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{url('/about')}}"
                         aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span
                             class="hide-menu">Documentation</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{url('/santri/profile')}}"
+                        aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span
+                            class="hide-menu">Edit Profile</span></a></li>
                 {{-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                     <i data-feather="power" class="svg-icon mr-2 ml-1"></i>Logout</a> --}}

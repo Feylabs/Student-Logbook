@@ -61,6 +61,10 @@
         @if (Auth::guard('santri')->check())
             @include('main.components.topbar-santri')
         @endif
+
+        @if (Auth::guard('guru')->check())
+            @include('main.components.topbar-guru')
+        @endif
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -72,6 +76,9 @@
         @endif
         @if (Auth::guard('santri')->check())
             @include('main.components.left-sidebar-santri')
+        @endif
+        @if (Auth::guard('guru')->check())
+            @include('main.components.left-sidebar-guru')
         @endif
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->

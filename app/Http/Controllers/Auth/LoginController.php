@@ -70,6 +70,24 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
 
+
+        // If contain email, this is Ustadz Account
+        if (strpos($request->nis, '@') !== false) {
+            if (Auth::guard('guru')->attempt(
+                [
+                    'email' => $request->nis,
+                    'password' => $request->password
+                ],
+                $request->get('remember')
+            )) {
+                return redirect()->intended('/guru')->with(['success' => "Login Berhasil"]);
+            } else {
+                return redirect('login/')->withErrors([
+                    'error' => 'Username Atau Password Salah'
+                ]);
+            }
+        }
+
         if (Auth::guard('santri')->attempt(
             [
                 'nis' => $request->nis,
@@ -77,7 +95,7 @@ class LoginController extends Controller
             ],
             $request->get('remember')
         )) {
-            return redirect()->intended('/santri')->with(['success'=>"Login Berhasil"]);
+            return redirect()->intended('/santri')->with(['success' => "Login Berhasil"]);
         } else {
             return redirect('login/santri')->withErrors([
                 'error' => 'Username Atau Password Salah'

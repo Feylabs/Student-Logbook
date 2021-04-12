@@ -5,12 +5,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/santri/mutabaah/export/daily', 'SantriController@laporanExcel')->name('santri.mutabaah.export.daily');
 Route::get('/santri/mutabaah/export/all', 'SantriController@laporanExcelAll')->name('santri.mutabaah.export.all');
 
+
+
+Route::post('/santri/update_password', 'SantriController@santriChangePassword');
+
 Route::prefix('santri')->group(function () {
     // Route::get('/','HomeSantriController@index');
     Route::get('/','Mp3StreamingController@viewSantriPreview');
 
 
     Route::view('/data/santri/import','admin.santri.import');
+    Route::get('/profile','santriController@santriViewProfile');
 
     Route::any('/mp3','Mp3StreamingController@viewSantriPreview');
 
