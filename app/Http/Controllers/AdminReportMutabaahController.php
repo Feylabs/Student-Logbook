@@ -107,7 +107,7 @@ class AdminReportMutabaahController extends Controller
         $jenjang = DB::select("SELECT jenjang from santri GROUP BY jenjang");
         $asrama = DB::select("SELECT asrama from santri GROUP BY asrama");
 
-        $mutabaah = Mutabaah::all();
+        $mutabaah = Mutabaah::where('deleted_at','=',null)->get();
         $currentMutabaah = Mutabaah::where('id', '=', $agenda_id)->first();
 
         if ($currentMutabaah == null) {

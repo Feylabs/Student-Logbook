@@ -108,7 +108,7 @@ class GuruReportMutabaahController extends Controller
 
         $kelompok = KelompokTahfidz::where('mentor_id','=',Auth::guard('guru')->id())->get();
 
-        $mutabaah = Mutabaah::all();
+        $mutabaah = Mutabaah::where('deleted_at','=',null)->get();
         $currentMutabaah = Mutabaah::where('id', '=', $agenda_id)->first();
 
         if ($currentMutabaah == null) {
