@@ -25,10 +25,9 @@ Auth::routes();
 
 Route::redirect('/','/login');
 
-Route::get('login/','Auth\LoginController@indexSantri');
-Route::get('login/santri','Auth\LoginController@indexSantri');
-Route::get('login/admin','Auth\LoginController@indexAdmin');
+Route::view('login/santri','auth.login_santri');
 
+Route::view('login/admin','auth.login_admin');
 
 Route::post('/login/santri/proc', 'Auth\LoginController@santriLogin')->name('login-santri');
 Route::post('/login/admin/proc', 'Auth\LoginController@adminLogin')->name('login-admin');

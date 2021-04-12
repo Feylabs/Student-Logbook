@@ -37,39 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('guest')->except('logout');
-    }
-
-    function check()
-    {
-        if (Auth::guard('santri')->check()) {
-            return redirect('/santri');
-        }
-
-        if (Auth::guard('santri')->check()) {
-            return redirect('/guru');
-        }
-    }
-
-    function indexAdmin()
-    {
-        if (Auth::guard('admin')->check()) {
-            return redirect('/admin');
-        }
-
-        $this->check();
-        return view('auth.login_admin');
-    }
-
-    function indexGuru()
-    {
-        $this->check();
-        return view('auth.login_santri');
-    }
-    function indexSantri()
-    {
-        $this->check();
-        return view('auth.login_santri');
+        $this->middleware('guest')->except('logout');
     }
 
     public function adminLogin(Request $request)
