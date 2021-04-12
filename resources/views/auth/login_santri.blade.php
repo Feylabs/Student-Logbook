@@ -73,6 +73,12 @@
             z-index: 300;
         }
 
+        @media only screen and (max-width: 600px) {
+            .miii {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 
@@ -102,7 +108,7 @@
             <div class="background-image"></div>
 
             <div class="auth-box row round-all">
-                <div class="col-lg-7 col-md-5 modal-bg-img round-top-left round-bottom-left"
+                <div class="col-lg-7 miii col-md-5 modal-bg-img round-top-left round-bottom-left"
                     style="background-image: url({{ URL::to('/bootstrap_ui/') }}/assets/images/kampus-albinaa.jpg);">
                 </div>
                 <div class="col-lg-5 col-md-7 bg-white round-top-right round-bottom-right">

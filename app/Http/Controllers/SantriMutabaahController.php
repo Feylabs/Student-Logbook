@@ -122,6 +122,8 @@ class SantriMutabaahController extends Controller
             $object->mutabaah_id = $request->mutabaah_id;
             $object->santri_id = $request->santri_id;
 
+            // dd($request->all());
+
             $object->activity_id = $item;
 
             if ($value == "on") {

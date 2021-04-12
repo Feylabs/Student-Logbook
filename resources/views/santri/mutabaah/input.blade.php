@@ -1,5 +1,164 @@
 @extends('main.app')
 
+@section('style')
+    <style>
+        /**
+                 * Simple HTML/CSS switch
+                 */
+        .componentsBox .content {
+            margin-bottom: 20px;
+        }
+
+        .m5 {
+            margin: 0 5px;
+        }
+
+        .switch {
+            display: inline-block;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .switch small {
+            display: inline-block;
+            width: 43px;
+            height: 19px;
+            background: #455a64;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .switch small:after {
+            content: "Tidak";
+            position: absolute;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            width: 100%;
+            left: 0px;
+            text-align: right;
+            padding: 0 6px;
+            box-sizing: border-box;
+            line-height: 18px;
+        }
+
+        .switch small:before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: .3s;
+            box-shadow: -3px 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .switch input:checked~small {
+            background: #4fc5c5;
+            transition: .3s;
+        }
+
+        .switch input:checked~small:before {
+            transform: translate(25px, 0px);
+            transition: .3s;
+        }
+
+        .switch input:checked~small:after {
+            content: "Ya";
+            text-align: left;
+        }
+
+        .switchSmall {
+            display: inline-block;
+        }
+
+        .switchSmall input {
+            display: none;
+        }
+
+        .switchSmall small {
+            display: inline-block;
+            width: 32px;
+            height: 16px;
+            background: #455a64;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .switchSmall small:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: .3s;
+            box-shadow: -3px 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .switchSmall input:checked~small {
+            background: #4fc5c5;
+            transition: .3s;
+        }
+
+        .switchSmall input:checked~small:before {
+            transform: translate(16px, 0px);
+            transition: .3s;
+        }
+
+        .switchSmall2 {
+            display: inline-block;
+        }
+
+        .switchSmall2 input {
+            display: none;
+        }
+
+        .switchSmall2 small {
+            display: inline-block;
+            width: 38px;
+            height: 15px;
+            background: #455a64;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .switchSmall2 small:before {
+            content: "";
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            background: #fff;
+            border-radius: 50%;
+            top: -2px;
+            left: -1px;
+            transition: .3s;
+            box-shadow: -3px 0 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .switchSmall2 input:checked~small {
+            background: #4fc5c5;
+            transition: .3s;
+        }
+
+        .switchSmall2 input:checked~small:before {
+            transform: translate(20px, 0px);
+            transition: .3s;
+            box-shadow: 3px 0 3px rgba(0, 0, 0, 0.25);
+        }
+
+    </style>
+@endsection
+
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
@@ -16,7 +175,7 @@
             </div>
         </div>
         <div class="col-5 align-self-center">
-          
+
         </div>
     </div>
 @endsection
@@ -45,8 +204,7 @@
 
                     </div>
                     <div class="table-responsive">
-
-                        <table id="table_data" class="table table-striped table-bordered no-wrap">
+                        <table id="table_data" class="table table-striped table-bordered no-wrap w-100">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -59,21 +217,42 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama_kegiatan }}</td>
+
                                         <td>
-                                            <div class="custom-switch custom-switch-label-yesno text-center">
-                                                <input type="hidden" name="activity[{{ $item->id }}]" value="0" />
-                                                <input class="custom-switch-input" name="activity[{{ $item->id }}]"
+                                            <input type="hidden" name="activity[{{ $item->id }}]" value="0" />
+
+                                            <label class="switch m5" for="toggle_{{ $loop->iteration }}">
+                                                <input name="activity[{{ $item->id }}]"
                                                     id="toggle_{{ $loop->iteration }}" type="checkbox">
-                                                <label class="custom-switch-btn" for="toggle_{{ $loop->iteration }}"></label>
-                                                <div style="margin-top: 20px" class="custom-switch-content-checked text-center">
-                                                    <span class="text-success">Ya</span>
-                                                </div>
-                                                <div style="margin-top: 20px"
-                                                    class="custom-switch-content-unchecked text-center">
-                                                    <span class="text-danger">Tidak</span>
-                                                </div>
-                                            </div>
+                                                <small></small>
+                                            </label>
+
+                                            {{-- <input type="checkbox" name="activity[{{ $item->id }}]" hidden="hidden"
+                                                id="toggle_{{ $loop->iteration }}">
+                                            <label class="switch" for="toggle_{{ $loop->iteration }}"></label> --}}
                                         </td>
+                                        {{-- <td class=" custom-switch custom-switch-label-yesno text-center">
+
+
+
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="" id=""
+                                                        value="checkedValue" checked>
+                                                    Display value
+                                                </label>
+                                            </div>
+
+                                            <input width="100%" class="custom-switch-input" name="activity[{{ $item->id }}]"
+                                                id="toggle_{{ $loop->iteration }}" type="checkbox">
+                                            <label class="custom-switch-btn" for="toggle_{{ $loop->iteration }}"></label>
+                                            <div class="custom-switch-content-checked">
+                                                <span class="text-success">Ya</span>
+                                            </div>
+                                            <div class="custom-switch-content-unchecked">
+                                                <span class="text-danger">Tidak</span>
+                                            </div>
+                                        </td> --}}
                                     </tr>
                                 @empty
 
