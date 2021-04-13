@@ -363,132 +363,13 @@
                 ],
 
             });
-            var table = $('#table_record').DataTable({
-                searching: true,
-                dom: 'Tf<"clear">lrtip<"bottom"B>',
-                buttons: [{
-                        extend: 'excelHtml5',
-                        title: 
-                        '@php
-                        if ($widget['currentMutabaah'] != null) {
-                            echo $widget['currentMutabaah']->judul."_".$widget['currentMutabaah']->tanggal;
-                        }else{
-                            echo "ERR! Tidak Ada Data";
-                        }
-                        @endphp'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        orientation: 'landscape',
-                        title: 
-                        '@php
-                        if ($widget['currentMutabaah'] != null) {
-                            echo $widget['currentMutabaah']->judul."_".$widget['currentMutabaah']->tanggal;
-                        }else{
-                            echo "ERR! Tidak Ada Data";
-                        }
-                        @endphp '
-                    },
-                ],
 
-            });
-
-            $('body').on("click", ".btn-delete", function() {
-                var id = $(this).attr("id")
-                $(".btn-destroy").attr("id", id)
-                $("#destroy-modal").modal("show")
-            });
-
-
-            // Edit & Update
-            $('body').on("click", ".btn-edit", function() {
-                var id = $(this).attr("id")
-                $.ajax({
-                    url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
-                    method: "GET",
-                    success: function(response) {
-                        console.log(response.toString());
-                        $("#edit-modal").modal("show")
-                        console.log(response)
-                        $("#id").val(response.data.id)
-                        $("#name").val(response.data.judul)
-                        $("#edit_date").val(response.data.tanggal)
-
-                        $("#tableActivity > tbody").html("");
-                        response.activity.forEach(element => {
-                            $("#tableActivity").find('tbody')
-                                .append($('<tr>')
-                                    .append($('<td>')
-                                        .append($('<div>' + element.nama_kegiatan +
-                                            '</div>'))
-                                    )
-                                    .append($('<td>')
-                                        .append($('<div>' + element.nama_kegiatan +
-                                            '</div>'))
-                                    )
-                                    .append($('<td>')
-                                        .append($('<div>' + element.poin + '</div>'))
-                                    )
-                                );
-                        });
-                    }
-                })
-            });
+      
 
         });
 
-        $("#editForm").on("submit", function(e) {
-            e.preventDefault()
-            var id = $("#id").val()
-            var judul = $("#name").val()
-            var tanggal = $("#edit_date").val()
-            var status = $("#new_status").val()
-            $.ajax({
-                url: "{{ URL::to('/') }}/mutabaah/" + id + "/updateAjax",
-                method: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "id": id,
-                    "judul": judul,
-                    "tanggal": tanggal,
-                    "status": status,
-                },
-                success: function(result, status, xhr) {
-                    console.log(result);
-                    $('#table_mutabaah').DataTable().ajax.reload();
-                    $("#edit-modal").modal("hide")
-                    swal("Alhamdulillah", "Berhasil Mengupdate Mutaba'ah", "success");
-                },
-                error: function(xhr, error, code) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err);
-                    alert(err.toString());
-                    swal("Error", "Gagal Mengupdate Mutaba'ah", "error");
-                }
-            })
-        })
+    
 
-        $(".btn-destroy").on("click", function() {
-            var id = $(this).attr("id")
-            $.ajax({
-                url: "{{ URL::to('/') }}/mutabaah/" + id + "/deleteAjax",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "user_id": {{ Auth::guard('guru')->user()->id }},
-                    "id": id,
-                },
-                method: "DELETE",
-                success: function() {
-                    $("#destroy-modal").modal("hide")
-                    $('#table_mutabaah').DataTable().ajax.reload();
-                },
-                error: function(xhr, error, code) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err);
-                    swal("Error", "Gagal Mengupdate Mutaba'ah " + err.toString, "error");
-                }
-            });
-        })
 
     </script>
 

@@ -363,27 +363,13 @@
                 dom: 'Tf<"clear">lrtip<"bottom"B>',
                 buttons: [{
                         extend: 'excelHtml5',
-                        title: 
-                        '@php
-                        if ($widget['currentMutabaah'] != null) {
-                            echo $widget['currentMutabaah']->judul."_".$widget['currentMutabaah']->tanggal;
-                        }else{
-                            echo "ERR! Tidak Ada Data";
-                        }
-                        @endphp'
+                        title: 'Data export'
                     },
                     {
                         extend: 'pdfHtml5',
                         orientation: 'landscape',
                         pageSize: 'A1',
-                        title: 
-                        '@php
-                        if ($widget['currentMutabaah'] != null) {
-                            echo $widget['currentMutabaah']->judul."_".$widget['currentMutabaah']->tanggal;
-                        }else{
-                            echo "ERR! Tidak Ada Data";
-                        }
-                        @endphp '
+                        title: 'Data export'
                     },
                 ],
 
