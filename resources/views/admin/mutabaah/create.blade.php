@@ -271,25 +271,27 @@
 
 
         function addDefaultRow() {
-            addRowManually("Qiyamul Lail",10);
-            addRowManually("Bangun Sebelum Azan Shubuh",5);
-            addRowManually("Membaca Dzikir Pagi",7);
-            addRowManually("Membaca Dzikir Petang",7);
-            addRowManually("Berpuasa / Shoum",3);
-            addRowManually("Sholat Dhuha",3);
-            addRowManually("Sholat Shubuh Tepat Waktu",7);
-            addRowManually("Sholat Dzuhur Tepat Waktu",7);
-            addRowManually("Sholat Ashar Tepat Waktu",7);
-            addRowManually("Sholat Maghrib Tepat Waktu",7);
-            addRowManually("Sholat Isya Tepat Waktu",7);
-            addRowManually("Tilawah Quran diluar Waktu Halaqoh",5);
-            addRowManually("Birrul Walidain / Membantu Orang Tua",5);
-            addRowManually("Membaca Buku-Buku Islam/Pengetahuan",5);
-            addRowManually("Membaca/Menghafalkan Hadits",5);
-            addRowManually("Berolahraga",5);
-            addRowManually("Bersedekah",5);
-            addRowManually("Mendengar Murottal AlQuran",5);
-
+            addRowManually("Makan Sahur",5);
+            addRowManually("Sholat Shubuh",8);
+            addRowManually("Tilawah Setelah Sholat Shubuh",2);
+            addRowManually("Membaca Dzikir Pagi",4);
+            addRowManually("Sholat Syuruq",4);
+            addRowManually("Sholat Dhuha",4);
+            addRowManually("Sholat Dzuhur",8);
+            addRowManually("Tilawah Setelah Sholat Dzuhur",2);
+            addRowManually("Sholat Ashar",8);
+            addRowManually("Tilawah Setelah Sholat Ashar",2);
+            addRowManually("Birrul Walidain",7);
+            addRowManually("Membaca Dzikir Petang",4);
+            addRowManually("Olahraga",4);
+            addRowManually("Bersedekah / Memberi Makan Untuk Orang Berbuka",5);
+            addRowManually("Membaca Buku/Kitab/Muroja'ah Pelajaran",4);
+            addRowManually("Sholat Maghrib",8);
+            addRowManually("Tilawah Setelah/Sebelum Sholat Maghrib",2);
+            addRowManually("Shalat Isya",8);
+            addRowManually("Sholat Tarawih",5);
+            addRowManually("Tilawah Setelah Sholat Tarawih",2);
+            addRowManually("Sholat Sunnah Rawatib",4);
             swal("Alhamdulillah", "Berhasil Menambahkan Kegiatan", "success");
         }
 
