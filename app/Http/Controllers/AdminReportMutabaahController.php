@@ -56,6 +56,10 @@ class AdminReportMutabaahController extends Controller
                 ->get();
 
             $santri = Santri::where('id', '=', $key->santri_id)->first();
+            if ($santri==null) { 
+            continue;
+            }
+
             $class_current = $class_id;
 
 
@@ -90,6 +94,7 @@ class AdminReportMutabaahController extends Controller
                     continue;
                 }
             } else {
+
                 $razkun[] = [
                     "santri_id" => $key->santri_id,
                     "santri_nis" => $santri->nis,
