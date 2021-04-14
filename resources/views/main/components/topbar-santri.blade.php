@@ -168,7 +168,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ URL::to('bootstrap_ui') }}/assets/images/users/profile-pic.jpg" alt="user"
+                        <img src="{{ URL::to('bootstrap_ui') }}/assets/images/users/profile-pic.jpg?n={{time()}}" alt="user"
                             class="rounded-circle" width="40">
                         <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
                                 class="text-dark">{{ Auth::guard('santri')->user()->nama }}</span> <i
