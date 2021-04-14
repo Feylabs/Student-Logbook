@@ -20,14 +20,16 @@ include __DIR__.'/user_guru.php';
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes();
 
 
-Route::redirect('/','/login');
+Route::redirect('/','/login')->middleware('myAuth');
 
-Route::view('login/santri','auth.login_santri');
+Route::view('login/santri','auth.login_santri')->middleware('myAuth');
 
-Route::view('login/admin','auth.login_admin');
+Route::view('/login','auth.login_santri')->middleware('myAuth');
+Route::view('login/admin','auth.login_admin')->middleware('myAuth');
 
 Route::post('/login/santri/proc', 'Auth\LoginController@santriLogin')->name('login-santri');
 Route::post('/login/admin/proc', 'Auth\LoginController@adminLogin')->name('login-admin');
@@ -35,6 +37,10 @@ Route::any('santri/{id}/resetPassword','SantriController@resetPassword');
 Route::any('guru/{id}/resetPassword','GuruController@resetPassword');
 
 
-Route::view('login/','auth.login_santri');
+
+//These 3 Route Not Used Yet
+// Route::post('/logout-santri', 'Auth\LoginController@logoutStudent')->name('logout-santri');
+// Route::post('/logout-guru', 'Auth\LoginController@logoutMentor')->name('logout-guru');
+// Route::post('/logout-admin', 'Auth\LoginController@logoutMentor')->name('logout-admin');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

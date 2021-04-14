@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
 
         'admin' => \App\Http\Middleware\Admin::class,
         'guru' => \App\Http\Middleware\Guru::class,
-        'santri' => \App\Http\Middleware\Santri::class
+        'santri' => \App\Http\Middleware\Santri::class,
+        'myAuth' => \App\Http\Middleware\CheckIfLogged::class,
     ];
 }
