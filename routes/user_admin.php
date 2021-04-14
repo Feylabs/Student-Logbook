@@ -12,6 +12,9 @@ Route::delete('/guru/{id}/adminDelete','GuruController@deleteAjax');
 
 Route::get('/group/{id}/detail','GroupController@viewDetail');
 
+Route::post('/group/add_group_member/','AdminGroupController@addMember');
+Route::post('/group/drop_member/','AdminGroupController@deleteMember');
+
 Route::group(['prefix' => 'post', 'middleware' => ['auth']], function(){
     Route::get('all','Controller@post');
     Route::get('user','Controller@post');    
@@ -55,7 +58,6 @@ Route::delete('/santri/{id}/deleteAjax','SantriController@deleteAjax');
 
 
 Route::post('/mutabaah/store','MutabaahController@store');
-
 Route::get('/mutabaah/eloquent','MutabaahController@testEloquent');
 Route::get('/mutabaah/{id}/fetch','MutabaahController@getById');
 Route::post('/mutabaah/{id}/updateAjax','MutabaahController@updateAjax');

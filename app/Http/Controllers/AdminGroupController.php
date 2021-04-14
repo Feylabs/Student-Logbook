@@ -39,17 +39,45 @@ class AdminGroupController extends Controller
         return view('admin.group.manage')->with(compact('widget'));
     }
 
-    function changeMentor(Request $request){
+    function changeMentor(Request $request)
+    {
         $object = KelompokTahfidz::findOrFail($request->group_id);
-        $object->mentor_id=$request->mentor_id;
+        $object->mentor_id = $request->mentor_id;
         $object->save();
 
         if ($object) {
-            return back()->with(["success"=>"Berhasil Mengubah Pembimbing Kelompok"]);
-        }else{
-            return back()->with(["failed"=>"Gagal Mengubah Pembimbing Kelompok"]);
+            return back()->with(["success" => "Berhasil Mengubah Pembimbing Kelompok"]);
+        } else {
+            return back()->with(["failed" => "Gagal Mengubah Pembimbing Kelompok"]);
         }
     }
+
+    function addMember(Request $request)
+    {
+        foreach ($request->member as $key => $value) {
+            $object = Santri::findOrFail($value);
+            $object->group_id = $request->group_id;
+            $object->save();
+        }
+        // $object = Santri::findOrFail($request->santri_id);
+        // $object->group_id = null;
+
+        return back()->with(["success" => "Berhasil Menambah Santri Ke Kelompok"]);
+    }
+
+    function deleteMember(Request $request)
+    {
+        $object = Santri::findOrFail($request->santri_id);
+        $object->group_id = null;
+        $object->save();
+
+        if ($object) {
+            return back()->with(["success" => "Berhasil  Menghapus $object->nama dari Kelompok"]);
+        } else {
+            return back()->with(["error" => "Gagal Menghapus $object->nama dari Kelompok"]);
+        }
+    }
+
 
     function delete(Request $request)
     {
@@ -59,11 +87,13 @@ class AdminGroupController extends Controller
 
         $countGroup = KelompokTahfidz::all()->count();
         $countGuru = Guru::all()->count();
-        
+
+        // DB::table('santri')->where('kelompok_id','=',$id)->update(['kelompok_id'=> null]);
+
         if ($object) {
-            return back()->with(["success"=>"Berhasil Menghapus Anggota Kelompok"]);
-        }else{
-            return back()->with(["failed"=>"Gagal Menghapus Kelompok"]);
+            return back()->with(["success" => "Berhasil Menghapus Anggota Kelompok"]);
+        } else {
+            return back()->with(["failed" => "Gagal Menghapus Kelompok"]);
         }
     }
 
