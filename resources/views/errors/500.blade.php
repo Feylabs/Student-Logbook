@@ -24,7 +24,7 @@
                 <div class="d-flex justify-content-center">
                     <lottie-player style="max-width: 50%" src="https://assets4.lottiefiles.com/packages/lf20_28vrmff4.json"  background="transparent"  speed="1"  class="img-fluid"  loop  autoplay></lottie-player>
                 </div>
-            <div class="justify-content-center" style="text-align: center"><h2> <strong> 500 Internal Server Error</strong></h2><br> <h4>Kembali ke <a href="{{url('/')}}">SIBIMA</a><br>atau Hubungi <a href=""> SIBIMA IT-Helpdesk </a>jika gangguan terus berlanjut <br>
+            <div class="justify-content-center" style="text-align: center"><h2> <strong> 500 Internal Server Error , Hubungi IT Team atau</strong></h2><br> <h4>Kembali ke <a href="{{url('/')}}">Homepage</a><br><br><br>
             <br><small>Error Description : {{$exception->getMessage()}}</small> </h4><br><br>
             </div>
         </div>

@@ -30,7 +30,7 @@
                 <div class="d-flex justify-content-center">
                     <lottie-player style="max-width: 1060px" src="https://assets4.lottiefiles.com/datafiles/OzG1c5GtuAvq10U/data.json" autoplay mode="bounce" background="transparent" class="img-fluid img-max"  speed="1"  loop  ></lottie-player>
                 </div>
-            <div class="justify-content-center" style="text-align: center"><h2> <strong> Session Login Habis</strong></h2><br> <h4>Kembali ke <a href="{{url('/')}}">Homepage</a><br><br><br>
+            <div class="justify-content-center" style="text-align: center"><h2> <strong> Session Login Sudah Habis, Silakan Login Kembali</strong></h2><br> <h4>Kembali ke <a href="{{url('/')}}">Homepage</a><br><br><br>
             </div>
         </div>
     </div>
