@@ -59,6 +59,10 @@ class GuruReportMutabaahController extends Controller
 
             $santri = Santri::where('id', '=', $key->santri_id)->first();
 
+            if ($santri==null) {
+                continue;
+            }
+
 
             $kelompok_current = $kelompok_id;
             if ($kelompok_id != null  && $kelompok_id != "") {
