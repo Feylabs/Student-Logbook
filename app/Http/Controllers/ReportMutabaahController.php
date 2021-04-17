@@ -63,20 +63,22 @@ class ReportMutabaahController extends Controller
 
         $recordForCheck = SantriMutabaahRecord::where('mutabaah_id', '=', $agenda_id);
 
-        $santriNotFill = DB::table('santri')
-            ->select(
-                'santri.id',
-                'santri.nama',
-                'santri.kelas',
-                'santri.asrama',
-                'santri.nis',
-            )
+        // $santriNotFill = DB::table('santri')
+        //     ->select(
+        //         'santri.id',
+        //         'santri.nama',
+        //         'santri.kelas',
+        //         'santri.asrama',
+        //         'santri.nis',
+        //     )->whereNotExists(function ($query) {
+        //         $query->select(DB::raw(1))
+        //             ->from('santri_mutabaah_records')
+        //             ->whereRaw('santri.id = santri_mutabaah_records.santri_id');
+        //     })->get();
 
-            ->whereNotExists(function ($query) {
-                $query->select(DB::raw(1))
-                    ->from('santri_mutabaah_records')
-                    ->whereRaw('santri.id = santri_mutabaah_records.santri_id');
-            })->get();
+        $santriNotFill = Santri::leftJoin('santri_mutabaah_records', 'santri_mutabaah_records.id', '=', 'santri.id')
+            ->whereNull('santri_mutabaah_records.id')
+            ->get();
 
 
 
@@ -89,8 +91,8 @@ class ReportMutabaahController extends Controller
                 ->get();
 
             $santri = Santri::where('id', '=', $key->santri_id)->first();
-            if ($santri==null) { 
-            continue;
+            if ($santri == null) {
+                continue;
             }
 
             $class_current = $class_id;
@@ -98,21 +100,9 @@ class ReportMutabaahController extends Controller
 
             if ($class_id != null  && $class_id != "") {
 
-                $santriNotFill = DB::table('santri')
-                    ->select(
-                        'santri.id',
-                        'santri.nama',
-                        'santri.kelas',
-                        'santri.asrama',
-                        'santri.nis',
-                    )->where("kelas",'=',$class_current)
-
-                    ->whereNotExists(function ($query) {
-                        $query->select(DB::raw(1))
-                            ->from('santri_mutabaah_records')
-                            ->whereRaw('santri.id = santri_mutabaah_records.santri_id');
-                    })->get();
-
+                $santriNotFill = 
+                DB::select("SELECT nama , nis,kelas,group_id,asrama
+                FROM  santri WHERE kelas = '$class_id' AND id NOT IN (SELECT santri_id FROM santri_mutabaah_records where mutabaah_id = $agenda_id)");
 
                 if ($santri->kelas == $class_id) {
                     $razkun[] = [
@@ -145,11 +135,11 @@ class ReportMutabaahController extends Controller
         $jenjang = DB::select("SELECT jenjang from santri GROUP BY jenjang");
         $asrama = DB::select("SELECT asrama from santri GROUP BY asrama");
 
-        $mutabaah = Mutabaah::where('deleted_at','=',null)->get();
+        $mutabaah = Mutabaah::where('deleted_at', '=', null)->get();
         $currentMutabaah = Mutabaah::where('id', '=', $agenda_id)->first();
 
         if ($currentMutabaah == null) {
-            $santriNotFill=array();
+            $santriNotFill = array();
         }
 
         $widget = [
@@ -162,8 +152,8 @@ class ReportMutabaahController extends Controller
             "currentMutabaah" => $currentMutabaah,
             "activities" => $activities,
         ];
-        
-    
+
+
 
         // return $widget;
         // return $widget['recordSantri'];
