@@ -20,11 +20,9 @@ class CreateSantriMutabaahRecordsTable extends Migration
             $table->unsignedBigInteger('activity_id');
             $table->string('status')->nullable();
             $table->string('deleted_at')->nullable();
-
             $table->foreign('santri_id')->references('id')->on('santri')->onDelete('cascade') ;
             $table->foreign('mutabaah_id')->references('id')->on('mutabaah')->onDelete('cascade') ;
             $table->foreign('activity_id')->references('id')->on('activity')->onDelete('cascade') ;
-            
             $table->timestamps();
         });
     }

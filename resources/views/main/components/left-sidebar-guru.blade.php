@@ -18,7 +18,7 @@
                
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Laporan Mutabaah Santri</span></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('guru/mutabaah/report') }}"
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('guru/mutabaah/report/check') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">
                             Laporan Mutaba'ah
                         </span></a>

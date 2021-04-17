@@ -16,9 +16,9 @@ class GuruReportMutabaahController extends Controller
     function viewCheck(Request $request)
     {
         $agenda_id = $request->agenda_id;
-        $kelompok_id = $request->kelompok_id;
+        $class_id = $request->class_id;
 
-        $kelompok_current = "all";
+        $class_current = "all";
 
 
         $activities = Activity::where('mutabaah_id', '=', $agenda_id)->get();
@@ -58,14 +58,15 @@ class GuruReportMutabaahController extends Controller
                 ->get();
 
             $santri = Santri::where('id', '=', $key->santri_id)->first();
-
-            if ($santri==null) {
-                continue;
+            if ($santri==null) { 
+            continue;
             }
 
+            $class_current = $class_id;
 
-            $kelompok_current = $kelompok_id;
-            if ($kelompok_id != null  && $kelompok_id != "") {
+
+            if ($class_id != null  && $class_id != "") {
+
                 $santriNotFill = DB::table('santri')
                     ->select(
                         'santri.id',
@@ -73,14 +74,16 @@ class GuruReportMutabaahController extends Controller
                         'santri.kelas',
                         'santri.asrama',
                         'santri.nis',
-                    )->where("group_id",'=',$kelompok_current)
+                    )->where("kelas",'=',$class_current)
+
                     ->whereNotExists(function ($query) {
                         $query->select(DB::raw(1))
                             ->from('santri_mutabaah_records')
                             ->whereRaw('santri.id = santri_mutabaah_records.santri_id');
                     })->get();
 
-                if ($santri->group_id == $kelompok_id) {
+
+                if ($santri->kelas == $class_id) {
                     $razkun[] = [
                         "santri_id" => $key->santri_id,
                         "santri_nis" => $santri->nis,
@@ -93,6 +96,7 @@ class GuruReportMutabaahController extends Controller
                     continue;
                 }
             } else {
+
                 $razkun[] = [
                     "santri_id" => $key->santri_id,
                     "santri_nis" => $santri->nis,
@@ -110,8 +114,6 @@ class GuruReportMutabaahController extends Controller
         $jenjang = DB::select("SELECT jenjang from santri GROUP BY jenjang");
         $asrama = DB::select("SELECT asrama from santri GROUP BY asrama");
 
-        $kelompok = KelompokTahfidz::where('mentor_id','=',Auth::guard('guru')->id())->get();
-
         $mutabaah = Mutabaah::where('deleted_at','=',null)->get();
         $currentMutabaah = Mutabaah::where('id', '=', $agenda_id)->first();
 
@@ -120,8 +122,8 @@ class GuruReportMutabaahController extends Controller
         }
 
         $widget = [
-            "kelompokCurrent" => $kelompok_current,
-            "kelompok" => $kelompok,
+            "classCurrent" => $class_current,
+            "classes" => $classes,
             "santriNotFill" => $santriNotFill,
             "asrama" => $asrama,
             "recordSantri" => $razkun,
@@ -129,11 +131,13 @@ class GuruReportMutabaahController extends Controller
             "currentMutabaah" => $currentMutabaah,
             "activities" => $activities,
         ];
-
         
+    
 
         // return $widget;
         // return $widget['recordSantri'];
-        return view('guru.mutabaah.report.index')->with(compact('widget'));
+        return view('mutabaah.report.index')->with(compact('widget'));
+
     }
+
 }

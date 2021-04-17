@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="col-lg-9 p-4">
-                            <form action="{{ route('admin.mutabaah.search_filter_all') }}" method="post">
+                            <form action="{{ route('mutabaah.search_filter_all') }}" method="post">
                                 @csrf
                                 @method('POST')
 
@@ -454,9 +454,15 @@
             var id = $(this).attr("id")
             $.ajax({
                 url: "{{ URL::to('/') }}/mutabaah/" + id + "/deleteAjax",
+                @if (Auth::guard('admin'))
+                
+                @endif
+
+                @if (Auth::guard('guru'))
+                
+                @endif
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    "user_id": {{ Auth::guard('admin')->user()->id }},
                     "id": id,
                 },
                 method: "DELETE",
@@ -474,8 +480,7 @@
 
     </script>
 
-    @include('admin.mutabaah.report.script')
-
+    @include('mutabaah.report.script')
 
 
 
