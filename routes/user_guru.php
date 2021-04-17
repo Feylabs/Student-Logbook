@@ -13,8 +13,8 @@ Route::prefix('guru')->group(function () {
 
     Route::get('/mutabaah/report','GuruGroupController@init');
 
-    Route::post('/mutabaah/report/check','MutabaahController@viewCheck')->name('mutabaah.search_filter_all');
-    Route::get('/mutabaah/report/check','MutabaahController@viewCheck');
+    Route::post('/mutabaah/report/check','ReportMutabaahController@viewCheck')->name('mutabaah.search_filter_all');
+    Route::get('/mutabaah/report/check','ReportMutabaahController@viewCheck');
 
 
 });

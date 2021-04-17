@@ -30,8 +30,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::any('/data/mp3','Mp3StreamingController@viewAdminPreview');
     Route::any('/data/mp3/store','Mp3StreamingController@store')->name('admin.upload.mp3');
 
-    Route::post('/data/mutabaah/report/check','MutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');
-    Route::get('/data/mutabaah/report/check','MutabaahController@viewCheck');
+    Route::post('/data/mutabaah/report/check','ReportMutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');
+    Route::get('/data/mutabaah/report/check','ReportMutabaahController@viewCheck');
 
 
     Route::any('/data/group/create','AdminGroupController@viewAdminCreate');
