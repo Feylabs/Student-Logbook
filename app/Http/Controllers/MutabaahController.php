@@ -50,6 +50,37 @@ class MutabaahController extends Controller
         return view('admin.mutabaah.preview');
     }
 
+    function viewAdminManage(Request $request)
+    {
+
+        $data = Mutabaah::select('*')
+            ->whereColumn('deleted_at', '=', null)
+            ->orderBy('created_at', 'DESC');
+        if ($request->ajax()) {
+            $data = Mutabaah::select('*')
+                ->where('deleted_at', '=', null)
+                ->orderBy('created_at', 'DESC');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<div class="d-flex"><a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2 btn-edit">Edit</a>';
+                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a></div>';
+                    return $btn;
+                })
+                ->addColumn('created_byz', function ($row) {
+                    $mutabaah = Mutabaah::where('id', '=', $row->id)->get();
+                    $admin = Admin::where('id', '=', $row->created_by)->first();
+                    $name = $admin->name;
+                    return $name;
+                })
+                ->rawColumns(['action', 'created_byz'])
+                ->make(true);
+            dd($request->all());
+        }
+
+        return view('admin.mutabaah.manage');
+    }
+
     function getById($id)
     {
         $data = Mutabaah::find($id);
